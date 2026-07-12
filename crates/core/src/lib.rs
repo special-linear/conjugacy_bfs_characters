@@ -28,6 +28,7 @@ pub mod error;
 pub mod partition;
 pub mod report;
 pub mod spectra;
+pub mod transform;
 
 #[cfg(any(test, feature = "test-utils"))]
 pub mod testing;

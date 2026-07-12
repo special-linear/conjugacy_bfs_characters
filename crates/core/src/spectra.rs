@@ -189,6 +189,85 @@ impl BaseSpectra {
     }
 }
 
+/// Transpose-paired union spectrum (spec §11.1; design doc 02 §4.2).
+///
+/// Only representative rows (`ρ_id ≤ ρ'_id`) are kept: `R½ = (q + s)/2`.
+/// Per representative the engine tracks TWO power sequences,
+/// `P = θ_ρ^r` and `P' = θ_{ρ'}^r`, updated from the mixed-parity-safe
+/// decomposition `θ_ρ = θ_even + θ_odd`, `θ_{ρ'} = θ_even − θ_odd`
+/// (`θ_even/odd` = contributions of the even/odd generator classes).
+/// Radius weights: paired rows `W± = f·(P ± P')`; self-transpose rows
+/// `W₊ = W₋ = f·P` — NOT `f·(P + P')`, which would double-count (the trap
+/// called out by the design review). For self-transpose rows `θ_odd = 0`
+/// (self-conjugate characters vanish on odd classes) — asserted at build.
+pub struct PairedSpectrum {
+    /// Representative rows in canonical order (`ρ_id ≤ transpose(ρ_id)`).
+    pub rep_rows: Vec<PartitionId>,
+    /// Per representative: is it self-transpose?
+    pub is_self: Vec<bool>,
+    /// `θ_ρ` per representative (exact).
+    pub theta_plus: Vec<ExactInt>,
+    /// `θ_{ρ'}` per representative (exact).
+    pub theta_minus: Vec<ExactInt>,
+    /// `f_ρ` per representative.
+    pub degrees: Vec<BigUint>,
+}
+
+impl PairedSpectrum {
+    pub fn build(index: &PartitionIndex, spectra: &BaseSpectra, union: &ResolvedUnion) -> Self {
+        let q = index.count();
+        let mut rep_rows = Vec::new();
+        let mut is_self = Vec::new();
+        let mut theta_plus = Vec::new();
+        let mut theta_minus = Vec::new();
+        let mut rep_degrees = Vec::new();
+        for rho in 0..q as u32 {
+            let t = index.transpose_id(rho);
+            if t < rho {
+                continue; // its representative appeared earlier
+            }
+            let mut even = ExactInt::zero();
+            let mut odd = ExactInt::zero();
+            for &class in &union.class_ids {
+                let j = spectra
+                    .base_classes()
+                    .iter()
+                    .position(|&b| b == class)
+                    .expect("union classes must be among base classes");
+                let w = &spectra.omega_column(j)[rho as usize];
+                if index.sign(class) == 1 {
+                    even += w;
+                } else {
+                    odd += w;
+                }
+            }
+            let self_transpose = t == rho;
+            if self_transpose {
+                assert!(
+                    odd.is_zero(),
+                    "self-transpose row {rho} has nonzero odd spectrum — pairing algebra broken"
+                );
+            }
+            theta_plus.push(&even + &odd);
+            theta_minus.push(&even - &odd);
+            rep_rows.push(rho);
+            is_self.push(self_transpose);
+            rep_degrees.push(spectra.degrees()[rho as usize].clone());
+        }
+        Self {
+            rep_rows,
+            is_self,
+            theta_plus,
+            theta_minus,
+            degrees: rep_degrees,
+        }
+    }
+
+    pub fn rep_count(&self) -> usize {
+        self.rep_rows.len()
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -301,6 +380,51 @@ mod tests {
         let spectra = BaseSpectra::build(&idx, &mn, &[idx.identity_id()]).unwrap();
         for rho in 0..idx.count() {
             assert_eq!(spectra.omega_column(0)[rho], ExactInt::from(1));
+        }
+    }
+
+    #[test]
+    fn paired_spectrum_matches_full_theta() {
+        // θ_minus at the representative of ρ must equal the full θ at ρ',
+        // for mixed, odd-only, and even-only unions.
+        for (n, specs) in [
+            (7u16, vec!["2"]),
+            (7, vec!["3"]),
+            (7, vec!["2", "3"]),
+            (8, vec!["2", "2,2", "3"]),
+        ] {
+            let (idx, mn) = setup(n);
+            let templates: Vec<CycleTypeTemplate> =
+                specs.iter().map(|s| s.parse().unwrap()).collect();
+            let union = resolve_union(&idx, &templates, false).unwrap();
+            let spectra = BaseSpectra::build(&idx, &mn, &union.class_ids).unwrap();
+            let full_theta = spectra.theta(&union.class_ids);
+            let paired = PairedSpectrum::build(&idx, &spectra, &union);
+
+            // rep count = (q + s)/2
+            let self_count = (0..idx.count() as u32)
+                .filter(|&i| idx.transpose_id(i) == i)
+                .count();
+            assert_eq!(
+                paired.rep_count(),
+                (idx.count() + self_count) / 2,
+                "n={n} {specs:?}"
+            );
+
+            for (pos, &rho) in paired.rep_rows.iter().enumerate() {
+                let t = idx.transpose_id(rho);
+                assert_eq!(
+                    paired.theta_plus[pos], full_theta[rho as usize],
+                    "theta_plus at rho={rho}"
+                );
+                assert_eq!(
+                    paired.theta_minus[pos], full_theta[t as usize],
+                    "theta_minus must equal theta at the transpose row"
+                );
+                if paired.is_self[pos] {
+                    assert_eq!(paired.theta_plus[pos], paired.theta_minus[pos]);
+                }
+            }
         }
     }
 

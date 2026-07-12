@@ -3,6 +3,7 @@
 #![deny(clippy::float_arithmetic)]
 
 pub mod degrees;
+pub mod memtable;
 pub mod mn;
 pub mod rimhook;
 

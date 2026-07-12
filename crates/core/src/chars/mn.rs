@@ -27,7 +27,7 @@ use std::sync::{Arc, Mutex};
 
 use num_traits::{One, Zero};
 
-use crate::arith::ExactInt;
+use crate::arith::{ExactInt, ModCtx};
 use crate::chars::rimhook::BetaSet;
 use crate::partition::{canonical_cmp, partitions_in_canonical_order, Partition};
 
@@ -97,6 +97,29 @@ impl CsrOp {
         }
         out
     }
+
+    /// Modular lanes: MN needs only signed adds, no multiplications.
+    /// `src`/output layout: one residue vector per prime context.
+    fn apply_mod(&self, src: &[Vec<u32>], ctxs: &[ModCtx]) -> Vec<Vec<u32>> {
+        let targets = self.row_ptr.len() - 1;
+        let mut out: Vec<Vec<u32>> = ctxs.iter().map(|_| Vec::with_capacity(targets)).collect();
+        for t in 0..targets {
+            let entries = &self.entries[self.row_ptr[t] as usize..self.row_ptr[t + 1] as usize];
+            for (lane, ctx) in ctxs.iter().enumerate() {
+                let mut acc = 0u32;
+                for &(source, sign) in entries {
+                    let v = src[lane][source as usize];
+                    acc = if sign > 0 {
+                        ctx.add(acc, v)
+                    } else {
+                        ctx.sub(acc, v)
+                    };
+                }
+                out[lane].push(acc);
+            }
+        }
+        out
+    }
 }
 
 /// The evaluator for one `n`: level indexes plus a lazily built, cached set
@@ -151,6 +174,31 @@ impl MnEvaluator {
         }
         debug_assert_eq!(v.len(), self.levels[self.n as usize].count());
         v
+    }
+
+    /// Modular character column, one lane per prime: `χ^ρ(ν) mod p` for
+    /// every `ρ ⊢ n` in canonical order. Same walker as [`column_exact`],
+    /// residue arithmetic only (add/sub — MN has no multiplications).
+    pub fn column_mod(&self, nu: &Partition, ctxs: &[ModCtx]) -> Vec<Vec<u32>> {
+        assert_eq!(nu.n(), self.n, "target class must partition n");
+        let mut v: Vec<Vec<u32>> = ctxs.iter().map(|_| vec![1u32]).collect();
+        let mut level = 0u16;
+        for &l in nu.parts().iter().rev() {
+            let op = self.op(level, l);
+            v = op.apply_mod(&v, ctxs);
+            level += l as u16;
+        }
+        v
+    }
+
+    /// Materialize every operator any column chain can touch, so later
+    /// rayon-parallel column generation never contends on the op cache.
+    pub fn prebuild_all_ops(&self) {
+        for l in 1..=self.n.min(255) as u8 {
+            for m in 0..=(self.n - l as u16) {
+                let _ = self.op(m, l);
+            }
+        }
     }
 
     /// Exact single value `χ^ρ(ν)` (tests/fixtures convenience — computes the
@@ -270,6 +318,37 @@ mod tests {
                     assert_eq!(*value, ExactInt::from(expected), "n={n}, rho={rho:?}");
                 } else {
                     assert_eq!(*value, ExactInt::zero(), "n={n}, rho={rho:?}");
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn modular_columns_equal_exact_reduced() {
+        use crate::arith::{screening_primes, ModCtx};
+        let primes = screening_primes(2);
+        // also a small prime (> n) to exercise wraparound
+        let ctxs: Vec<ModCtx> = primes
+            .iter()
+            .copied()
+            .chain([crate::arith::Prime31(13)])
+            .map(ModCtx::new)
+            .collect();
+        for n in [1u16, 5, 9, 12] {
+            let ev = MnEvaluator::new(n);
+            let idx = PartitionIndex::build(n).unwrap();
+            for nu in idx.partitions() {
+                let exact = ev.column_exact(nu);
+                let modular = ev.column_mod(nu, &ctxs);
+                for (lane, ctx) in ctxs.iter().enumerate() {
+                    for (rho, value) in exact.iter().enumerate() {
+                        assert_eq!(
+                            modular[lane][rho],
+                            ctx.reduce_bigint(value),
+                            "n={n}, nu={nu:?}, rho={rho}, p={}",
+                            ctx.prime().0
+                        );
+                    }
                 }
             }
         }

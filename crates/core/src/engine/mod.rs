@@ -7,10 +7,32 @@
 #![deny(clippy::float_arithmetic)]
 
 pub mod exact;
+pub mod modular;
 
+use fixedbitset::FixedBitSet;
 use serde::{Deserialize, Serialize};
 
-use crate::partition::PartitionId;
+use crate::partition::{PartitionId, PartitionIndex};
+use crate::spectra::UnionParity;
+
+/// Parity upper bound on the reachable set (pure sign argument, never
+/// subgroup theory): even-only unions stay inside even-sign types; odd or
+/// mixed unions have no restriction.
+pub fn parity_feasible_set(index: &PartitionIndex, parity: UnionParity) -> FixedBitSet {
+    let q = index.count();
+    let mut feasible = FixedBitSet::with_capacity(q);
+    match parity {
+        UnionParity::Even => {
+            for nu in 0..q {
+                if index.sign(nu as PartitionId) == 1 {
+                    feasible.insert(nu);
+                }
+            }
+        }
+        UnionParity::Odd | UnionParity::Mixed => feasible.insert_range(..),
+    }
+    feasible
+}
 
 /// Why a run terminated (merged design: the spec §5.2 empty-layer rule is
 /// primary; the parity-bound cover check is a sound early exit).

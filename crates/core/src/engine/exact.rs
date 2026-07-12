@@ -15,7 +15,7 @@ use crate::chars::MnEvaluator;
 use crate::engine::{LayerRecord, StoppingRule, UnionRun};
 use crate::error::ClassdiamError;
 use crate::partition::{PartitionId, PartitionIndex};
-use crate::spectra::{BaseSpectra, ResolvedUnion, UnionParity};
+use crate::spectra::{BaseSpectra, ResolvedUnion};
 
 /// Exact spectral calculator: produces the full coefficient vector
 /// `a_r(ν) = (1/n!)·Σ_ρ f_ρ·χ^ρ(ν)·θ_ρ^r` at the current radius.
@@ -144,24 +144,7 @@ pub fn run_exact(
         support: vec![identity],
     }];
 
-    // Parity upper bound on the reachable set (pure sign argument):
-    // even-only unions stay inside even types; otherwise no restriction.
-    let feasible: FixedBitSet = match union.parity {
-        UnionParity::Even => {
-            let mut b = FixedBitSet::with_capacity(q);
-            for nu in 0..q {
-                if index.sign(nu as PartitionId) == 1 {
-                    b.insert(nu);
-                }
-            }
-            b
-        }
-        UnionParity::Odd | UnionParity::Mixed => {
-            let mut b = FixedBitSet::with_capacity(q);
-            b.insert_range(..);
-            b
-        }
-    };
+    let feasible = super::parity_feasible_set(index, union.parity);
 
     let union_size = ExactInt::from(union.union_size.clone());
     let mut union_size_pow = ExactInt::one();
