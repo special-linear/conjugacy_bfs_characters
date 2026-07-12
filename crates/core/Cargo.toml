@@ -23,6 +23,9 @@ thiserror = { workspace = true }
 
 [dev-dependencies]
 proptest = { workspace = true }
+# Self-dependency so integration tests in tests/ see the `testing` oracle
+# module (which is gated behind the test-utils feature).
+classdiam-core = { path = ".", features = ["test-utils"] }
 
 [features]
 default = []
