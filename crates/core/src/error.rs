@@ -16,7 +16,9 @@ pub enum ClassdiamError {
 
     /// The identity class was supplied as a generator without
     /// `allow_identity_generator` (spec §5.3).
-    #[error("identity class rejected as generator for S_{n}; set allow_identity_generator to permit it")]
+    #[error(
+        "identity class rejected as generator for S_{n}; set allow_identity_generator to permit it"
+    )]
     IdentityGenerator { n: u16 },
 
     /// An empty generating set (no classes after validation).

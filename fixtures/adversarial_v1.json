@@ -1,0 +1,4108 @@
+{
+ "schema_version": "fixture.v1",
+ "kind": "adversarial_modular_tuples",
+ "generator": {
+  "script": "gen_fixtures.py",
+  "script_version": "1",
+  "sympy_version": "1.14.0",
+  "python_version": "3.13.9"
+ },
+ "search": {
+  "max_n": 9,
+  "max_r": 12,
+  "prime_sets": [
+   [
+    11
+   ],
+   [
+    13
+   ],
+   [
+    11,
+    13
+   ]
+  ]
+ },
+ "note": "a_r(nu) > 0 but divisible by every listed prime: a modular engine on exactly these primes sees all-zero residues and must certify, not stop (spec 23 F4/F9)",
+ "tuples": [
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     5,
+     2
+    ],
+    [
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    2,
+    11
+   ],
+   "r": 2,
+   "nu_index": 3,
+   "nu": [
+    5,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "143",
+   "masks_first_hit": true
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     5,
+     2
+    ],
+    [
+     3,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    2,
+    8
+   ],
+   "r": 3,
+   "nu_index": 13,
+   "nu": [
+    2,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "72072",
+   "masks_first_hit": true
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     4,
+     3
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "union_class_indices": [
+    4,
+    7
+   ],
+   "r": 3,
+   "nu_index": 14,
+   "nu": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "80080",
+   "masks_first_hit": true
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     3,
+     3
+    ],
+    [
+     3,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    7,
+    9
+   ],
+   "r": 3,
+   "nu_index": 14,
+   "nu": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "80080",
+   "masks_first_hit": true
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     7
+    ],
+    [
+     4,
+     3
+    ]
+   ],
+   "union_class_indices": [
+    0,
+    4
+   ],
+   "r": 3,
+   "nu_index": 10,
+   "nu": [
+    3,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "277992",
+   "masks_first_hit": true
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     7
+    ],
+    [
+     3,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    0,
+    9
+   ],
+   "r": 3,
+   "nu_index": 10,
+   "nu": [
+    3,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "277992",
+   "masks_first_hit": true
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     3,
+     3,
+     2
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    12,
+    20
+   ],
+   "r": 2,
+   "nu_index": 16,
+   "nu": [
+    3,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "143",
+   "masks_first_hit": true
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     3,
+     3
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    13,
+    20
+   ],
+   "r": 2,
+   "nu_index": 16,
+   "nu": [
+    3,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "143",
+   "masks_first_hit": true
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     6,
+     2
+    ],
+    [
+     4,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    2,
+    10
+   ],
+   "r": 2,
+   "nu_index": 2,
+   "nu": [
+    6,
+    2
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "1716",
+   "masks_first_hit": true
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    18
+   ],
+   "r": 3,
+   "nu_index": 15,
+   "nu": [
+    3,
+    2,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "3861",
+   "masks_first_hit": true
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     3,
+     3
+    ],
+    [
+     2,
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    13,
+    17
+   ],
+   "r": 3,
+   "nu_index": 1,
+   "nu": [
+    7,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "91091",
+   "masks_first_hit": true
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     3,
+     2
+    ],
+    [
+     2,
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    15,
+    17
+   ],
+   "r": 3,
+   "nu_index": 3,
+   "nu": [
+    6,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "82368",
+   "masks_first_hit": true
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     6
+    ],
+    [
+     3,
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    6,
+    21
+   ],
+   "r": 2,
+   "nu_index": 5,
+   "nu": [
+    6,
+    2,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "858",
+   "masks_first_hit": true
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     3,
+     3,
+     2
+    ],
+    [
+     3,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    19,
+    23
+   ],
+   "r": 2,
+   "nu_index": 5,
+   "nu": [
+    6,
+    2,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "858",
+   "masks_first_hit": true
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     7,
+     2
+    ],
+    [
+     4,
+     3,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    2,
+    13
+   ],
+   "r": 2,
+   "nu_index": 11,
+   "nu": [
+    5,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "7150",
+   "masks_first_hit": true
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     7,
+     2
+    ],
+    [
+     3
+    ]
+   ],
+   "union_class_indices": [
+    2,
+    24
+   ],
+   "r": 2,
+   "nu_index": 24,
+   "nu": [
+    3,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "7579",
+   "masks_first_hit": true
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     7
+    ],
+    [
+     5,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    3,
+    9
+   ],
+   "r": 2,
+   "nu_index": 11,
+   "nu": [
+    5,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "6864",
+   "masks_first_hit": true
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     7
+    ],
+    [
+     3,
+     3,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    3,
+    19
+   ],
+   "r": 2,
+   "nu_index": 11,
+   "nu": [
+    5,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "5720",
+   "masks_first_hit": true
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     6
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    0,
+    8
+   ],
+   "r": 2,
+   "nu_index": 8,
+   "nu": [
+    2,
+    2,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "44",
+   "masks_first_hit": true
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     5
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "union_class_indices": [
+    1,
+    4
+   ],
+   "r": 2,
+   "nu_index": 1,
+   "nu": [
+    5,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "88",
+   "masks_first_hit": true
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     5
+    ],
+    [
+     3
+    ]
+   ],
+   "union_class_indices": [
+    1,
+    6
+   ],
+   "r": 2,
+   "nu_index": 1,
+   "nu": [
+    5,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "88",
+   "masks_first_hit": true
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     5
+    ],
+    [
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    1,
+    7
+   ],
+   "r": 2,
+   "nu_index": 8,
+   "nu": [
+    2,
+    2,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "66",
+   "masks_first_hit": true
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     5
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    1,
+    8
+   ],
+   "r": 2,
+   "nu_index": 4,
+   "nu": [
+    3,
+    3
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "99",
+   "masks_first_hit": true
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     5
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    1,
+    8
+   ],
+   "r": 2,
+   "nu_index": 6,
+   "nu": [
+    3,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "99",
+   "masks_first_hit": true
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     4,
+     2
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "union_class_indices": [
+    2,
+    4
+   ],
+   "r": 2,
+   "nu_index": 6,
+   "nu": [
+    3,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "65",
+   "masks_first_hit": true
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     4,
+     2
+    ],
+    [
+     3
+    ]
+   ],
+   "union_class_indices": [
+    2,
+    6
+   ],
+   "r": 2,
+   "nu_index": 4,
+   "nu": [
+    3,
+    3
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "65",
+   "masks_first_hit": true
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     3,
+     3
+    ],
+    [
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    4,
+    7
+   ],
+   "r": 2,
+   "nu_index": 4,
+   "nu": [
+    3,
+    3
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "13",
+   "masks_first_hit": true
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     3
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    6,
+    9
+   ],
+   "r": 2,
+   "nu_index": 6,
+   "nu": [
+    3,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "13",
+   "masks_first_hit": true
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     6
+    ],
+    [
+     5
+    ]
+   ],
+   "union_class_indices": [
+    0,
+    1
+   ],
+   "r": 2,
+   "nu_index": 8,
+   "nu": [
+    2,
+    2,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "104",
+   "masks_first_hit": true
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     5
+    ],
+    [
+     4,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    1,
+    2
+   ],
+   "r": 2,
+   "nu_index": 10,
+   "nu": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "234",
+   "masks_first_hit": true
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     4,
+     3
+    ]
+   ],
+   "union_class_indices": [
+    4
+   ],
+   "r": 2,
+   "nu_index": 7,
+   "nu": [
+    3,
+    3,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "78",
+   "masks_first_hit": true
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     3,
+     3
+    ]
+   ],
+   "union_class_indices": [
+    7
+   ],
+   "r": 2,
+   "nu_index": 7,
+   "nu": [
+    3,
+    3,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "52",
+   "masks_first_hit": true
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     3,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    8
+   ],
+   "r": 2,
+   "nu_index": 8,
+   "nu": [
+    3,
+    2,
+    2
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "26",
+   "masks_first_hit": true
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     3,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    8
+   ],
+   "r": 2,
+   "nu_index": 10,
+   "nu": [
+    3,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "39",
+   "masks_first_hit": true
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     3,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    9
+   ],
+   "r": 2,
+   "nu_index": 7,
+   "nu": [
+    3,
+    3,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "78",
+   "masks_first_hit": true
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     3
+    ]
+   ],
+   "union_class_indices": [
+    10
+   ],
+   "r": 2,
+   "nu_index": 10,
+   "nu": [
+    3,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "13",
+   "masks_first_hit": true
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     4,
+     3
+    ],
+    [
+     3,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    4,
+    8
+   ],
+   "r": 2,
+   "nu_index": 0,
+   "nu": [
+    7
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "77",
+   "masks_first_hit": true
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     4,
+     3
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    4,
+    13
+   ],
+   "r": 2,
+   "nu_index": 0,
+   "nu": [
+    7
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "77",
+   "masks_first_hit": true
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     4
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    6,
+    12
+   ],
+   "r": 2,
+   "nu_index": 10,
+   "nu": [
+    3,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "66",
+   "masks_first_hit": true
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     3,
+     3
+    ],
+    [
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    7,
+    11
+   ],
+   "r": 2,
+   "nu_index": 7,
+   "nu": [
+    3,
+    3,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "55",
+   "masks_first_hit": true
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     3,
+     2,
+     2
+    ],
+    [
+     3,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    8,
+    9
+   ],
+   "r": 2,
+   "nu_index": 0,
+   "nu": [
+    7
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "77",
+   "masks_first_hit": true
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     3
+    ],
+    [
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    10,
+    11
+   ],
+   "r": 2,
+   "nu_index": 10,
+   "nu": [
+    3,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "22",
+   "masks_first_hit": true
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     5
+    ]
+   ],
+   "union_class_indices": [
+    6
+   ],
+   "r": 2,
+   "nu_index": 1,
+   "nu": [
+    7,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "91",
+   "masks_first_hit": true
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     4,
+     4
+    ]
+   ],
+   "union_class_indices": [
+    7
+   ],
+   "r": 2,
+   "nu_index": 1,
+   "nu": [
+    7,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "77",
+   "masks_first_hit": true
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     4,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    9
+   ],
+   "r": 2,
+   "nu_index": 14,
+   "nu": [
+    3,
+    2,
+    2,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "78",
+   "masks_first_hit": true
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     4
+    ]
+   ],
+   "union_class_indices": [
+    11
+   ],
+   "r": 2,
+   "nu_index": 19,
+   "nu": [
+    2,
+    2,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "66",
+   "masks_first_hit": true
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     3,
+     3,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    12
+   ],
+   "r": 2,
+   "nu_index": 6,
+   "nu": [
+    5,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "55",
+   "masks_first_hit": true
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     3,
+     3
+    ]
+   ],
+   "union_class_indices": [
+    13
+   ],
+   "r": 2,
+   "nu_index": 6,
+   "nu": [
+    5,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "55",
+   "masks_first_hit": true
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     5
+    ],
+    [
+     4
+    ]
+   ],
+   "union_class_indices": [
+    6,
+    11
+   ],
+   "r": 2,
+   "nu_index": 7,
+   "nu": [
+    4,
+    4
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "66",
+   "masks_first_hit": true
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     5
+    ],
+    [
+     3,
+     3,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    6,
+    12
+   ],
+   "r": 2,
+   "nu_index": 2,
+   "nu": [
+    6,
+    2
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "78",
+   "masks_first_hit": true
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     5
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    6,
+    20
+   ],
+   "r": 2,
+   "nu_index": 1,
+   "nu": [
+    7,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "91",
+   "masks_first_hit": true
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     4,
+     4
+    ],
+    [
+     3
+    ]
+   ],
+   "union_class_indices": [
+    7,
+    16
+   ],
+   "r": 2,
+   "nu_index": 1,
+   "nu": [
+    7,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "91",
+   "masks_first_hit": true
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     4,
+     4
+    ],
+    [
+     3
+    ]
+   ],
+   "union_class_indices": [
+    7,
+    16
+   ],
+   "r": 2,
+   "nu_index": 10,
+   "nu": [
+    4,
+    2,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "88",
+   "masks_first_hit": true
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     4,
+     4
+    ],
+    [
+     2,
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    7,
+    17
+   ],
+   "r": 2,
+   "nu_index": 1,
+   "nu": [
+    7,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "91",
+   "masks_first_hit": true
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     3,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    23
+   ],
+   "r": 2,
+   "nu_index": 22,
+   "nu": [
+    3,
+    2,
+    2,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "78",
+   "masks_first_hit": true
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    27
+   ],
+   "r": 2,
+   "nu_index": 27,
+   "nu": [
+    2,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "22",
+   "masks_first_hit": true
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     6,
+     3
+    ],
+    [
+     3
+    ]
+   ],
+   "union_class_indices": [
+    4,
+    24
+   ],
+   "r": 2,
+   "nu_index": 4,
+   "nu": [
+    6,
+    3
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "78",
+   "masks_first_hit": true
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     5,
+     2,
+     2
+    ],
+    [
+     4
+    ]
+   ],
+   "union_class_indices": [
+    9,
+    17
+   ],
+   "r": 2,
+   "nu_index": 10,
+   "nu": [
+    5,
+    2,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "44",
+   "masks_first_hit": true
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     5
+    ],
+    [
+     4
+    ]
+   ],
+   "union_class_indices": [
+    11,
+    17
+   ],
+   "r": 2,
+   "nu_index": 12,
+   "nu": [
+    4,
+    4,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "66",
+   "masks_first_hit": true
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     5
+    ],
+    [
+     3,
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    11,
+    21
+   ],
+   "r": 2,
+   "nu_index": 0,
+   "nu": [
+    9
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "39",
+   "masks_first_hit": true
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     4
+    ],
+    [
+     3,
+     3,
+     3
+    ]
+   ],
+   "union_class_indices": [
+    17,
+    18
+   ],
+   "r": 2,
+   "nu_index": 12,
+   "nu": [
+    4,
+    4,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "66",
+   "masks_first_hit": true
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     4
+    ],
+    [
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    17,
+    26
+   ],
+   "r": 2,
+   "nu_index": 16,
+   "nu": [
+    4,
+    2,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "78",
+   "masks_first_hit": true
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     3,
+     3,
+     3
+    ],
+    [
+     3,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    18,
+    23
+   ],
+   "r": 2,
+   "nu_index": 3,
+   "nu": [
+    7,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "91",
+   "masks_first_hit": true
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     3,
+     3,
+     3
+    ],
+    [
+     2,
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    18,
+    25
+   ],
+   "r": 2,
+   "nu_index": 5,
+   "nu": [
+    6,
+    2,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "52",
+   "masks_first_hit": true
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     3,
+     3,
+     3
+    ],
+    [
+     2,
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    18,
+    25
+   ],
+   "r": 2,
+   "nu_index": 11,
+   "nu": [
+    5,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "55",
+   "masks_first_hit": true
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     3,
+     3,
+     2
+    ],
+    [
+     3
+    ]
+   ],
+   "union_class_indices": [
+    19,
+    24
+   ],
+   "r": 2,
+   "nu_index": 19,
+   "nu": [
+    3,
+    3,
+    2,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "44",
+   "masks_first_hit": true
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     6
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    0,
+    8
+   ],
+   "r": 3,
+   "nu_index": 8,
+   "nu": [
+    2,
+    2,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "6149",
+   "masks_first_hit": false
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     3,
+     2
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    5,
+    8
+   ],
+   "r": 3,
+   "nu_index": 8,
+   "nu": [
+    2,
+    2,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "6149",
+   "masks_first_hit": false
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     6
+    ],
+    [
+     3,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    0,
+    5
+   ],
+   "r": 4,
+   "nu_index": 8,
+   "nu": [
+    2,
+    2,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "9225216",
+   "masks_first_hit": false
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     5
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    1,
+    8
+   ],
+   "r": 4,
+   "nu_index": 4,
+   "nu": [
+    3,
+    3
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "3544398",
+   "masks_first_hit": false
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     5
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    1,
+    8
+   ],
+   "r": 4,
+   "nu_index": 6,
+   "nu": [
+    3,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "3544398",
+   "masks_first_hit": false
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     4
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "union_class_indices": [
+    3,
+    4
+   ],
+   "r": 5,
+   "nu_index": 0,
+   "nu": [
+    6
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "51919296",
+   "masks_first_hit": false
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     5,
+     2
+    ],
+    [
+     3,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    2,
+    9
+   ],
+   "r": 3,
+   "nu_index": 2,
+   "nu": [
+    5,
+    2
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "314028",
+   "masks_first_hit": false
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     4
+    ],
+    [
+     3
+    ]
+   ],
+   "union_class_indices": [
+    6,
+    10
+   ],
+   "r": 4,
+   "nu_index": 9,
+   "nu": [
+    3,
+    2,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "1288144",
+   "masks_first_hit": false
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     5,
+     2
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "union_class_indices": [
+    2,
+    7
+   ],
+   "r": 4,
+   "nu_index": 0,
+   "nu": [
+    7
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "75339264",
+   "masks_first_hit": false
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     5,
+     2
+    ],
+    [
+     3,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    2,
+    8
+   ],
+   "r": 4,
+   "nu_index": 6,
+   "nu": [
+    4,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "50505312",
+   "masks_first_hit": false
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     4,
+     3
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    4,
+    13
+   ],
+   "r": 4,
+   "nu_index": 10,
+   "nu": [
+    3,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "15093507",
+   "masks_first_hit": false
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     7
+    ]
+   ],
+   "union_class_indices": [
+    0
+   ],
+   "r": 4,
+   "nu_index": 10,
+   "nu": [
+    3,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "108231552",
+   "masks_first_hit": false
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     2,
+     2
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    19,
+    20
+   ],
+   "r": 3,
+   "nu_index": 19,
+   "nu": [
+    2,
+    2,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "2288",
+   "masks_first_hit": false
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     6
+    ],
+    [
+     4,
+     4
+    ]
+   ],
+   "union_class_indices": [
+    3,
+    7
+   ],
+   "r": 3,
+   "nu_index": 3,
+   "nu": [
+    6,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "2738736",
+   "masks_first_hit": false
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     6,
+     2
+    ],
+    [
+     5,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    2,
+    5
+   ],
+   "r": 3,
+   "nu_index": 2,
+   "nu": [
+    6,
+    2
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "10059192",
+   "masks_first_hit": false
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     3
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    16,
+    20
+   ],
+   "r": 4,
+   "nu_index": 11,
+   "nu": [
+    4,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "41184",
+   "masks_first_hit": false
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     4
+    ]
+   ],
+   "union_class_indices": [
+    11
+   ],
+   "r": 4,
+   "nu_index": 10,
+   "nu": [
+    4,
+    2,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "1894464",
+   "masks_first_hit": false
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     2,
+     2,
+     2,
+     2
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    17,
+    19
+   ],
+   "r": 4,
+   "nu_index": 21,
+   "nu": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "1246245",
+   "masks_first_hit": false
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     4,
+     2,
+     2
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    15,
+    28
+   ],
+   "r": 3,
+   "nu_index": 15,
+   "nu": [
+    4,
+    2,
+    2,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "8304868",
+   "masks_first_hit": false
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     5,
+     4
+    ],
+    [
+     3,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    7,
+    23
+   ],
+   "r": 3,
+   "nu_index": 23,
+   "nu": [
+    3,
+    2,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "48606129",
+   "masks_first_hit": false
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     5
+    ],
+    [
+     4,
+     3
+    ]
+   ],
+   "union_class_indices": [
+    11,
+    14
+   ],
+   "r": 3,
+   "nu_index": 14,
+   "nu": [
+    4,
+    3,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "22225632",
+   "masks_first_hit": false
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     6,
+     2
+    ],
+    [
+     4,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    5,
+    16
+   ],
+   "r": 3,
+   "nu_index": 16,
+   "nu": [
+    4,
+    2,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "298296856",
+   "masks_first_hit": false
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     5,
+     3
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "union_class_indices": [
+    8,
+    20
+   ],
+   "r": 3,
+   "nu_index": 8,
+   "nu": [
+    5,
+    3,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "115493664",
+   "masks_first_hit": false
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     5,
+     2
+    ],
+    [
+     3,
+     3,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    10,
+    19
+   ],
+   "r": 3,
+   "nu_index": 19,
+   "nu": [
+    3,
+    3,
+    2,
+    1
+   ],
+   "primes": [
+    11,
+    13
+   ],
+   "a_r": "124200648",
+   "masks_first_hit": false
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     3,
+     3
+    ],
+    [
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    4,
+    7
+   ],
+   "r": 3,
+   "nu_index": 4,
+   "nu": [
+    3,
+    3
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "495",
+   "masks_first_hit": false
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     3,
+     3
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    4,
+    9
+   ],
+   "r": 3,
+   "nu_index": 9,
+   "nu": [
+    2,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "363",
+   "masks_first_hit": false
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     3
+    ],
+    [
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    6,
+    7
+   ],
+   "r": 3,
+   "nu_index": 7,
+   "nu": [
+    2,
+    2,
+    2
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "363",
+   "masks_first_hit": false
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     3
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    6,
+    9
+   ],
+   "r": 3,
+   "nu_index": 6,
+   "nu": [
+    3,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "495",
+   "masks_first_hit": false
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     2,
+     2,
+     2
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    7,
+    9
+   ],
+   "r": 3,
+   "nu_index": 7,
+   "nu": [
+    2,
+    2,
+    2
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "156",
+   "masks_first_hit": false
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     2,
+     2,
+     2
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    7,
+    9
+   ],
+   "r": 3,
+   "nu_index": 9,
+   "nu": [
+    2,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "156",
+   "masks_first_hit": false
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     6
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "union_class_indices": [
+    0,
+    4
+   ],
+   "r": 3,
+   "nu_index": 4,
+   "nu": [
+    3,
+    3
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "5346",
+   "masks_first_hit": false
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     6
+    ],
+    [
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    0,
+    7
+   ],
+   "r": 3,
+   "nu_index": 0,
+   "nu": [
+    6
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "7128",
+   "masks_first_hit": false
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     6
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    0,
+    8
+   ],
+   "r": 3,
+   "nu_index": 8,
+   "nu": [
+    2,
+    2,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "6149",
+   "masks_first_hit": false
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     3,
+     2
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    5,
+    8
+   ],
+   "r": 3,
+   "nu_index": 8,
+   "nu": [
+    2,
+    2,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "6149",
+   "masks_first_hit": false
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     2,
+     2,
+     2
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    7,
+    9
+   ],
+   "r": 4,
+   "nu_index": 10,
+   "nu": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "4680",
+   "masks_first_hit": false
+  },
+  {
+   "n": 6,
+   "union_templates": [
+    [
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    8
+   ],
+   "r": 4,
+   "nu_index": 1,
+   "nu": [
+    5,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "11375",
+   "masks_first_hit": false
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     2,
+     2,
+     2
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    11,
+    12
+   ],
+   "r": 3,
+   "nu_index": 12,
+   "nu": [
+    2,
+    2,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "2464",
+   "masks_first_hit": false
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     2,
+     2,
+     2
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    11,
+    13
+   ],
+   "r": 3,
+   "nu_index": 13,
+   "nu": [
+    2,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "1196",
+   "masks_first_hit": false
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     2,
+     2
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    12,
+    13
+   ],
+   "r": 3,
+   "nu_index": 13,
+   "nu": [
+    2,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "1166",
+   "masks_first_hit": false
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     6
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    1,
+    12
+   ],
+   "r": 3,
+   "nu_index": 12,
+   "nu": [
+    2,
+    2,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "90961",
+   "masks_first_hit": false
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     5,
+     2
+    ],
+    [
+     3
+    ]
+   ],
+   "union_class_indices": [
+    2,
+    10
+   ],
+   "r": 3,
+   "nu_index": 10,
+   "nu": [
+    3,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "27963",
+   "masks_first_hit": false
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     5
+    ],
+    [
+     4
+    ]
+   ],
+   "union_class_indices": [
+    3,
+    6
+   ],
+   "r": 3,
+   "nu_index": 6,
+   "nu": [
+    4,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "77636",
+   "masks_first_hit": false
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     5
+    ],
+    [
+     3
+    ]
+   ],
+   "union_class_indices": [
+    3,
+    10
+   ],
+   "r": 3,
+   "nu_index": 3,
+   "nu": [
+    5,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "79563",
+   "masks_first_hit": false
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     5
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    3,
+    12
+   ],
+   "r": 3,
+   "nu_index": 12,
+   "nu": [
+    2,
+    2,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "97801",
+   "masks_first_hit": false
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     4,
+     3
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "union_class_indices": [
+    4,
+    7
+   ],
+   "r": 3,
+   "nu_index": 4,
+   "nu": [
+    4,
+    3
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "70620",
+   "masks_first_hit": false
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     4,
+     3
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "union_class_indices": [
+    4,
+    7
+   ],
+   "r": 3,
+   "nu_index": 7,
+   "nu": [
+    3,
+    3,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "69696",
+   "masks_first_hit": false
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     4,
+     3
+    ],
+    [
+     3
+    ]
+   ],
+   "union_class_indices": [
+    4,
+    10
+   ],
+   "r": 3,
+   "nu_index": 4,
+   "nu": [
+    4,
+    3
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "33813",
+   "masks_first_hit": false
+  },
+  {
+   "n": 7,
+   "union_templates": [
+    [
+     3,
+     3
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    7,
+    12
+   ],
+   "r": 3,
+   "nu_index": 12,
+   "nu": [
+    2,
+    2,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "24713",
+   "masks_first_hit": false
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    19
+   ],
+   "r": 3,
+   "nu_index": 19,
+   "nu": [
+    2,
+    2,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "1976",
+   "masks_first_hit": false
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     2,
+     2,
+     2
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    18,
+    19
+   ],
+   "r": 3,
+   "nu_index": 18,
+   "nu": [
+    2,
+    2,
+    2,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "9702",
+   "masks_first_hit": false
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     2,
+     2
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    19,
+    20
+   ],
+   "r": 3,
+   "nu_index": 19,
+   "nu": [
+    2,
+    2,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "2288",
+   "masks_first_hit": false
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     2,
+     2
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    19,
+    20
+   ],
+   "r": 3,
+   "nu_index": 19,
+   "nu": [
+    2,
+    2,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "2288",
+   "masks_first_hit": false
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     5,
+     3
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    4,
+    20
+   ],
+   "r": 3,
+   "nu_index": 20,
+   "nu": [
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "59422",
+   "masks_first_hit": false
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     5
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    6,
+    20
+   ],
+   "r": 3,
+   "nu_index": 20,
+   "nu": [
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "29326",
+   "masks_first_hit": false
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     4
+    ],
+    [
+     3
+    ]
+   ],
+   "union_class_indices": [
+    11,
+    16
+   ],
+   "r": 3,
+   "nu_index": 16,
+   "nu": [
+    3,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "15678",
+   "masks_first_hit": false
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     4
+    ],
+    [
+     2,
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    11,
+    17
+   ],
+   "r": 3,
+   "nu_index": 11,
+   "nu": [
+    4,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "12771",
+   "masks_first_hit": false
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     3,
+     3,
+     2
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    12,
+    20
+   ],
+   "r": 3,
+   "nu_index": 12,
+   "nu": [
+    3,
+    3,
+    2
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "82680",
+   "masks_first_hit": false
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     3,
+     3,
+     2
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    12,
+    20
+   ],
+   "r": 3,
+   "nu_index": 20,
+   "nu": [
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "67694",
+   "masks_first_hit": false
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     3,
+     3
+    ],
+    [
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    13,
+    18
+   ],
+   "r": 3,
+   "nu_index": 18,
+   "nu": [
+    2,
+    2,
+    2,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "89154",
+   "masks_first_hit": false
+  },
+  {
+   "n": 8,
+   "union_templates": [
+    [
+     3,
+     2
+    ],
+    [
+     2,
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    15,
+    17
+   ],
+   "r": 3,
+   "nu_index": 17,
+   "nu": [
+    2,
+    2,
+    2,
+    2
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "28353",
+   "masks_first_hit": false
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     3,
+     3
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    20,
+    28
+   ],
+   "r": 3,
+   "nu_index": 28,
+   "nu": [
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "42120",
+   "masks_first_hit": false
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     3
+    ],
+    [
+     2,
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    24,
+    25
+   ],
+   "r": 3,
+   "nu_index": 24,
+   "nu": [
+    3,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "18213",
+   "masks_first_hit": false
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     2,
+     2,
+     2,
+     2
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    25,
+    28
+   ],
+   "r": 3,
+   "nu_index": 25,
+   "nu": [
+    2,
+    2,
+    2,
+    2,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "11037",
+   "masks_first_hit": false
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     5,
+     2,
+     2
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    9,
+    28
+   ],
+   "r": 3,
+   "nu_index": 28,
+   "nu": [
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "196680",
+   "masks_first_hit": false
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     5
+    ],
+    [
+     4
+    ]
+   ],
+   "union_class_indices": [
+    11,
+    17
+   ],
+   "r": 3,
+   "nu_index": 17,
+   "nu": [
+    4,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "466102",
+   "masks_first_hit": false
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     5
+    ],
+    [
+     3,
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    11,
+    21
+   ],
+   "r": 3,
+   "nu_index": 11,
+   "nu": [
+    5,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "776578",
+   "masks_first_hit": false
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     5
+    ],
+    [
+     3,
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    11,
+    21
+   ],
+   "r": 3,
+   "nu_index": 21,
+   "nu": [
+    3,
+    2,
+    2,
+    2
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "589941",
+   "masks_first_hit": false
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     5
+    ],
+    [
+     2,
+     2,
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    11,
+    25
+   ],
+   "r": 3,
+   "nu_index": 11,
+   "nu": [
+    5,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "558283",
+   "masks_first_hit": false
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     5
+    ],
+    [
+     2,
+     2
+    ]
+   ],
+   "union_class_indices": [
+    11,
+    27
+   ],
+   "r": 3,
+   "nu_index": 27,
+   "nu": [
+    2,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "689524",
+   "masks_first_hit": false
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     4,
+     3
+    ],
+    [
+     3
+    ]
+   ],
+   "union_class_indices": [
+    14,
+    24
+   ],
+   "r": 3,
+   "nu_index": 24,
+   "nu": [
+    3,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    11
+   ],
+   "a_r": "999933",
+   "masks_first_hit": false
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     4,
+     2
+    ],
+    [
+     2
+    ]
+   ],
+   "union_class_indices": [
+    16,
+    28
+   ],
+   "r": 3,
+   "nu_index": 28,
+   "nu": [
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "134940",
+   "masks_first_hit": false
+  },
+  {
+   "n": 9,
+   "union_templates": [
+    [
+     4
+    ],
+    [
+     3,
+     3
+    ]
+   ],
+   "union_class_indices": [
+    17,
+    20
+   ],
+   "r": 3,
+   "nu_index": 17,
+   "nu": [
+    4,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "primes": [
+    13
+   ],
+   "a_r": "331630",
+   "masks_first_hit": false
+  }
+ ]
+}

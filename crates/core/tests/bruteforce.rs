@@ -42,7 +42,10 @@ fn bfs_distances_and_layers_match_engine() {
         }
         compared += 1;
     }
-    assert!(compared >= 80, "too few catalog entries compared: {compared}");
+    assert!(
+        compared >= 80,
+        "too few catalog entries compared: {compared}"
+    );
 }
 
 /// Exact-length supports from the set-product DP match the engine's recorded
@@ -81,7 +84,10 @@ fn exact_length_supports_match_engine() {
         }
         compared += 1;
     }
-    assert!(compared >= 80, "too few catalog entries compared: {compared}");
+    assert!(
+        compared >= 80,
+        "too few catalog entries compared: {compared}"
+    );
 }
 
 /// Internal word counts `a_r(ν)` (per fixed element, spec §23 F2) match the
@@ -124,7 +130,10 @@ fn word_counts_match_group_algebra_dp() {
         }
         compared += 1;
     }
-    assert!(compared >= 60, "too few catalog entries compared: {compared}");
+    assert!(
+        compared >= 60,
+        "too few catalog entries compared: {compared}"
+    );
 }
 
 /// Mixed products (spec §16.3, §22.4): the spectral coefficient of

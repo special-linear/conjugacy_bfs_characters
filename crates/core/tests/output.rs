@@ -10,8 +10,8 @@ use std::path::PathBuf;
 use classdiam_core::chars::MnEvaluator;
 use classdiam_core::engine::exact::run_exact;
 use classdiam_core::partition::{CycleTypeTemplate, PartitionIndex};
-use classdiam_core::report::{build_result, RunMeta};
 use classdiam_core::report::schema::ResultDocument;
+use classdiam_core::report::{build_result, RunMeta};
 use classdiam_core::spectra::{resolve_union, BaseSpectra};
 use serde_json::Value;
 
@@ -71,18 +71,28 @@ fn golden_n06_g2() {
         std::fs::write(&path, serde_json::to_string_pretty(&document).unwrap()).unwrap();
         return;
     }
-    let committed = std::fs::read_to_string(&path)
-        .unwrap_or_else(|e| panic!("missing golden file {} ({e}); run with UPDATE_GOLDEN=1", path.display()));
+    let committed = std::fs::read_to_string(&path).unwrap_or_else(|e| {
+        panic!(
+            "missing golden file {} ({e}); run with UPDATE_GOLDEN=1",
+            path.display()
+        )
+    });
     let mut expected: Value = serde_json::from_str(&committed).unwrap();
     strip_volatile(&mut expected);
-    assert_eq!(current, expected, "golden mismatch — schema or math changed");
+    assert_eq!(
+        current, expected,
+        "golden mismatch — schema or math changed"
+    );
 }
 
 #[test]
 fn golden_values_match_worked_example() {
     // Independent of the file: the numbers the critique verified by hand.
     let document = n6_transpositions_document();
-    assert_eq!(document.results.distance, vec![5, 4, 4, 3, 4, 3, 2, 3, 2, 1, 0]);
+    assert_eq!(
+        document.results.distance,
+        vec![5, 4, 4, 3, 4, 3, 2, 3, 2, 1, 0]
+    );
     assert_eq!(document.results.diameter_identity_component, 5);
     assert_eq!(document.results.reachable_count, 11);
     assert!(document.results.bipartite);

@@ -75,8 +75,7 @@ pub fn build_result(
 
     let zero_rows_all_bases: Vec<PartitionId> = (0..q as u32)
         .filter(|&rho| {
-            (0..union.class_ids.len())
-                .all(|j| spectra.omega_column(j)[rho as usize].is_zero())
+            (0..union.class_ids.len()).all(|j| spectra.omega_column(j)[rho as usize].is_zero())
         })
         .collect();
 
@@ -132,7 +131,8 @@ pub fn build_result(
             hash_blake3: index.order_hash_hex(),
             partitions_reduced,
         },
-        row_col_convention: "rows=irreps(rho), cols=classes(nu); both in the canonical order".into(),
+        row_col_convention: "rows=irreps(rho), cols=classes(nu); both in the canonical order"
+            .into(),
         class_data: ClassData {
             sign: (0..q).map(|i| index.sign(i as PartitionId)).collect(),
             class_size: (0..q)

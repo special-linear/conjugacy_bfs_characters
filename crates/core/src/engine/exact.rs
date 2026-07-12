@@ -170,7 +170,10 @@ pub fn run_exact(
     let (stop_radius, stopping) = loop {
         // Early exit BEFORE the next transform when nothing new can appear.
         if visited.count_ones(..) == feasible.count_ones(..) {
-            break (layers.last().expect("layer 0 exists").r, StoppingRule::AllTypesVisited);
+            break (
+                layers.last().expect("layer 0 exists").r,
+                StoppingRule::AllTypesVisited,
+            );
         }
 
         transform.advance();
@@ -368,8 +371,8 @@ mod tests {
         assert_eq!(r.reachable_count, index.count());
         // mixed unions have no parity filter: some type must be hit at both
         // an even and an odd radius within the run
-        let both = (0..index.count())
-            .any(|nu| r.first_hit_even[nu] >= 0 && r.first_hit_odd[nu] >= 0);
+        let both =
+            (0..index.count()).any(|nu| r.first_hit_even[nu] >= 0 && r.first_hit_odd[nu] >= 0);
         assert!(both);
     }
 }

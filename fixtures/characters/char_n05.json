@@ -1,0 +1,131 @@
+{
+ "schema_version": "fixture.v1",
+ "kind": "full_character_table",
+ "generator": {
+  "script": "gen_fixtures.py",
+  "script_version": "1",
+  "sympy_version": "1.14.0",
+  "python_version": "3.13.9"
+ },
+ "n": 5,
+ "partition_order_convention": "lex_desc_full_parts_v1",
+ "row_col_convention": "table[nu_index][rho_index]",
+ "partitions": [
+  [
+   5
+  ],
+  [
+   4,
+   1
+  ],
+  [
+   3,
+   2
+  ],
+  [
+   3,
+   1,
+   1
+  ],
+  [
+   2,
+   2,
+   1
+  ],
+  [
+   2,
+   1,
+   1,
+   1
+  ],
+  [
+   1,
+   1,
+   1,
+   1,
+   1
+  ]
+ ],
+ "degrees": [
+  "1",
+  "4",
+  "5",
+  "6",
+  "5",
+  "4",
+  "1"
+ ],
+ "table": [
+  [
+   1,
+   -1,
+   0,
+   1,
+   0,
+   -1,
+   1
+  ],
+  [
+   1,
+   0,
+   -1,
+   0,
+   1,
+   0,
+   -1
+  ],
+  [
+   1,
+   -1,
+   1,
+   0,
+   -1,
+   1,
+   -1
+  ],
+  [
+   1,
+   1,
+   -1,
+   0,
+   -1,
+   1,
+   1
+  ],
+  [
+   1,
+   0,
+   1,
+   -2,
+   1,
+   0,
+   1
+  ],
+  [
+   1,
+   2,
+   1,
+   0,
+   -1,
+   -2,
+   -1
+  ],
+  [
+   1,
+   4,
+   5,
+   6,
+   5,
+   4,
+   1
+  ]
+ ],
+ "certificates_passed": [
+  "hook_degrees",
+  "content_column",
+  "orthogonality",
+  "transpose_sign",
+  "trivial_and_sign_rows"
+ ],
+ "payload_sha256": "991a3499f1cf957c16ab6dc748aea9e94ed7d28da6662cab19b5ff2208e6b7dd"
+}

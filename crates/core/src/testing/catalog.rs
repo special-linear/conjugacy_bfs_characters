@@ -127,7 +127,11 @@ pub fn resolve_entry(index: &PartitionIndex, entry: &CatalogEntry) -> ResolvedUn
 /// Brute-force cost guard: `|U| · n!` compositions must stay affordable
 /// (design doc 03 §3.1). Debug builds get a tighter budget.
 pub fn brute_force_affordable(index: &PartitionIndex, union: &ResolvedUnion) -> bool {
-    let budget: u64 = if cfg!(debug_assertions) { 20_000_000 } else { 300_000_000 };
+    let budget: u64 = if cfg!(debug_assertions) {
+        20_000_000
+    } else {
+        300_000_000
+    };
     let cost = union.union_size.clone() * index.factorial_n();
     cost <= BigUint::from(budget)
 }

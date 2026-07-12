@@ -183,10 +183,16 @@ mod tests {
     #[test]
     fn base_cases() {
         let ev = MnEvaluator::new(0);
-        assert_eq!(ev.column_exact(&Partition::identity(0)), vec![ExactInt::one()]);
+        assert_eq!(
+            ev.column_exact(&Partition::identity(0)),
+            vec![ExactInt::one()]
+        );
 
         let ev = MnEvaluator::new(1);
-        assert_eq!(ev.column_exact(&Partition::identity(1)), vec![ExactInt::one()]);
+        assert_eq!(
+            ev.column_exact(&Partition::identity(1)),
+            vec![ExactInt::one()]
+        );
     }
 
     #[test]
@@ -257,8 +263,7 @@ mod tests {
                 let rho = idx.partition(i as PartitionId);
                 // hook shape (n−k, 1^k): first part a, then all ones
                 let parts = rho.parts();
-                let is_hook =
-                    parts.len() == 1 || parts[1..].iter().all(|&p| p == 1);
+                let is_hook = parts.len() == 1 || parts[1..].iter().all(|&p| p == 1);
                 if is_hook {
                     let k = parts.len() - 1; // leg of the whole hook
                     let expected = if k % 2 == 0 { 1i64 } else { -1 };
@@ -343,9 +348,7 @@ mod tests {
             // columns: Σ_ρ χ^ρ(μ) χ^ρ(ν) = z_ν·δ
             for mu in 0..q {
                 for nu in mu..q {
-                    let sum: ExactInt = (0..q)
-                        .map(|rho| &table[mu][rho] * &table[nu][rho])
-                        .sum();
+                    let sum: ExactInt = (0..q).map(|rho| &table[mu][rho] * &table[nu][rho]).sum();
                     let expected = if mu == nu {
                         ExactInt::from(idx.z_value(mu as PartitionId).clone())
                     } else {

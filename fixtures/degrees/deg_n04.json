@@ -1,0 +1,77 @@
+{
+ "schema_version": "fixture.v1",
+ "kind": "degrees_and_class_data",
+ "generator": {
+  "script": "gen_fixtures.py",
+  "script_version": "1",
+  "sympy_version": "1.14.0",
+  "python_version": "3.13.9"
+ },
+ "n": 4,
+ "partition_order_convention": "lex_desc_full_parts_v1",
+ "partitions": [
+  [
+   4
+  ],
+  [
+   3,
+   1
+  ],
+  [
+   2,
+   2
+  ],
+  [
+   2,
+   1,
+   1
+  ],
+  [
+   1,
+   1,
+   1,
+   1
+  ]
+ ],
+ "degrees": [
+  "1",
+  "3",
+  "2",
+  "3",
+  "1"
+ ],
+ "class_sizes": [
+  "6",
+  "8",
+  "3",
+  "6",
+  "1"
+ ],
+ "z_values": [
+  "4",
+  "3",
+  "8",
+  "4",
+  "24"
+ ],
+ "signs": [
+  -1,
+  1,
+  1,
+  -1,
+  1
+ ],
+ "transpose_map": [
+  4,
+  3,
+  2,
+  1,
+  0
+ ],
+ "certificates_passed": [
+  "degree_squares_sum",
+  "class_size_sum",
+  "transpose_degree_symmetry"
+ ],
+ "payload_sha256": "2e3bdc2090e15b65ac720d9bce388832db8b70bf77762b8eaa47b77958f31f07"
+}

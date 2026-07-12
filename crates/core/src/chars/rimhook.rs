@@ -118,7 +118,13 @@ mod tests {
 
     #[test]
     fn roundtrip() {
-        for parts in [vec![], vec![3u8], vec![4, 2, 1], vec![2, 2, 2], vec![1, 1, 1]] {
+        for parts in [
+            vec![],
+            vec![3u8],
+            vec![4, 2, 1],
+            vec![2, 2, 2],
+            vec![1, 1, 1],
+        ] {
             let p = Partition::new(parts);
             for slots in [p.len() as u16, p.len() as u16 + 1, p.len() as u16 + 5, 10] {
                 if (slots as usize) < p.len() {

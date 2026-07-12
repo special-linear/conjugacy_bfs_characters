@@ -22,8 +22,7 @@ fn catalog_runs_with_coherent_results() {
         let index = PartitionIndex::build(entry.n).unwrap();
         let mn = MnEvaluator::new(entry.n);
         let union = resolve_entry(&index, &entry);
-        let run = run_exact(&index, &mn, &union)
-            .unwrap_or_else(|e| panic!("{}: {e}", entry.label));
+        let run = run_exact(&index, &mn, &union).unwrap_or_else(|e| panic!("{}: {e}", entry.label));
 
         let identity = index.identity_id() as usize;
         assert_eq!(run.distance[identity], 0, "{}", entry.label);
@@ -163,7 +162,11 @@ fn word_count_and_no_new_types_beyond_stop() {
                 .enumerate()
                 .map(|(nu, c)| ExactInt::from(index.class_size(nu as PartitionId).clone()) * c)
                 .sum();
-            assert_eq!(total, expected_words, "{}: word count at r={r}", entry.label);
+            assert_eq!(
+                total, expected_words,
+                "{}: word count at r={r}",
+                entry.label
+            );
 
             // beyond the stop, the support must stay inside the visited set
             if r > run.stop_radius {
@@ -186,10 +189,7 @@ fn word_count_and_no_new_types_beyond_stop() {
 /// parities at once, so no single-parity filter may be applied.
 #[test]
 fn mixed_unions_defeat_parity_filter() {
-    let entries: Vec<_> = union_catalog()
-        .into_iter()
-        .filter(|e| e.n <= 8)
-        .collect();
+    let entries: Vec<_> = union_catalog().into_iter().filter(|e| e.n <= 8).collect();
     let mut saw_mixed = 0;
     for entry in entries {
         let index = PartitionIndex::build(entry.n).unwrap();
@@ -211,7 +211,11 @@ fn mixed_unions_defeat_parity_filter() {
             }
             even && odd
         });
-        assert!(some_layer_has_both, "{}: expected mixed-parity layer", entry.label);
+        assert!(
+            some_layer_has_both,
+            "{}: expected mixed-parity layer",
+            entry.label
+        );
     }
     assert!(saw_mixed > 10, "catalog must contain mixed unions");
 }

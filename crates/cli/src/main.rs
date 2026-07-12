@@ -14,7 +14,11 @@ use classdiam_core::spectra::resolve_union;
 use classdiam_core::ClassdiamError;
 
 #[derive(Parser)]
-#[command(name = "classdiam", version, about = "Conjugacy-class BFS on S_n via characters")]
+#[command(
+    name = "classdiam",
+    version,
+    about = "Conjugacy-class BFS on S_n via characters"
+)]
 struct Cli {
     #[command(subcommand)]
     command: Command,
@@ -70,7 +74,11 @@ fn parse_n_spec(spec: &str) -> Result<Vec<u16>> {
         return Ok((a..=b).collect());
     }
     spec.split(',')
-        .map(|t| t.trim().parse::<u16>().with_context(|| format!("bad n value {t:?}")))
+        .map(|t| {
+            t.trim()
+                .parse::<u16>()
+                .with_context(|| format!("bad n value {t:?}"))
+        })
         .collect()
 }
 
@@ -223,6 +231,8 @@ fn verify(max_n: u16) -> Result<()> {
         checked += 1;
         println!("ok  {}  (diameter {})", entry.label, run.diameter);
     }
-    println!("verify: {checked} unions checked against brute-force BFS, {skipped} skipped by cost guard");
+    println!(
+        "verify: {checked} unions checked against brute-force BFS, {skipped} skipped by cost guard"
+    );
     Ok(())
 }

@@ -1,0 +1,23 @@
+name: Fixture reproducibility
+
+# Manual: regenerate all Python-produced fixtures with a pinned SymPy and
+# fail if anything drifted from the committed files.
+on:
+  workflow_dispatch:
+
+jobs:
+  regen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned SymPy
+        run: pip install sympy==1.14.0
+      - name: Regenerate fixtures
+        run: |
+          python tools/gen_fixtures.py
+          python tools/find_adversarial.py
+      - name: Diff against committed fixtures
+        run: git diff --exit-code fixtures/characters fixtures/degrees fixtures/adversarial_v1.json

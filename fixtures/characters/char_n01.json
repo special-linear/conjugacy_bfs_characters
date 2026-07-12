@@ -1,0 +1,33 @@
+{
+ "schema_version": "fixture.v1",
+ "kind": "full_character_table",
+ "generator": {
+  "script": "gen_fixtures.py",
+  "script_version": "1",
+  "sympy_version": "1.14.0",
+  "python_version": "3.13.9"
+ },
+ "n": 1,
+ "partition_order_convention": "lex_desc_full_parts_v1",
+ "row_col_convention": "table[nu_index][rho_index]",
+ "partitions": [
+  [
+   1
+  ]
+ ],
+ "degrees": [
+  "1"
+ ],
+ "table": [
+  [
+   1
+  ]
+ ],
+ "certificates_passed": [
+  "hook_degrees",
+  "orthogonality",
+  "transpose_sign",
+  "trivial_and_sign_rows"
+ ],
+ "payload_sha256": "2c30bffded9e3c2412d1a1e90b07b49a9d43cc1c5cab8daca54147b7eb2c7f79"
+}

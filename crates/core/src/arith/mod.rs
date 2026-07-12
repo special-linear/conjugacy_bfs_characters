@@ -26,5 +26,8 @@ pub const MAX_ACCUM_TERMS: u128 = 1 << 18;
 // terms * (p-1)^2 <= 2^18 * (2^31 - 1)^2 < 2^80 << 2^128.
 const _: () = {
     let worst = MAX_ACCUM_TERMS * (((1u128 << 31) - 1) * ((1u128 << 31) - 1));
-    assert!(worst < (1u128 << 80), "p31-u128-accumulate-v1 bound violated");
+    assert!(
+        worst < (1u128 << 80),
+        "p31-u128-accumulate-v1 bound violated"
+    );
 };

@@ -227,7 +227,10 @@ mod tests {
         assert_eq!(p.transpose().transpose(), p);
         assert!(Partition::new(vec![3u8, 2, 1]).is_self_transpose());
         assert!(!Partition::new(vec![3u8, 1]).is_self_transpose());
-        assert_eq!(Partition::new(vec![5u8]).transpose(), Partition::identity(5));
+        assert_eq!(
+            Partition::new(vec![5u8]).transpose(),
+            Partition::identity(5)
+        );
         // empty partition
         let e = Partition::new(SmallVec::<[u8; 16]>::new());
         assert_eq!(e.transpose(), e);

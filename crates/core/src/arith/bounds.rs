@@ -22,7 +22,13 @@ mod tests {
         // |U| = 15, r = 1: bound for a class of size 45 is 0 => certified zero.
         let pow = BigUint::from(15u32);
         assert!(coefficient_bound(&pow, &BigUint::from(45u32)).is_zero());
-        assert_eq!(coefficient_bound(&pow, &BigUint::from(15u32)), BigUint::from(1u32));
-        assert_eq!(coefficient_bound(&pow, &BigUint::from(1u32)), BigUint::from(15u32));
+        assert_eq!(
+            coefficient_bound(&pow, &BigUint::from(15u32)),
+            BigUint::from(1u32)
+        );
+        assert_eq!(
+            coefficient_bound(&pow, &BigUint::from(1u32)),
+            BigUint::from(15u32)
+        );
     }
 }

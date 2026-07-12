@@ -73,7 +73,10 @@ mod tests {
         // S_3: χ^{(2,1)}([3]) = -1, χ^{(2,1)}([2,1]) = 0, χ^{(2,1)}([1^3]) = 2
         let rho = Partition::new(vec![2u8, 1]);
         assert_eq!(mn.chi(&rho, &Partition::new(vec![3u8])), ExactInt::from(-1));
-        assert_eq!(mn.chi(&rho, &Partition::new(vec![2u8, 1])), ExactInt::from(0));
+        assert_eq!(
+            mn.chi(&rho, &Partition::new(vec![2u8, 1])),
+            ExactInt::from(0)
+        );
         assert_eq!(mn.chi(&rho, &Partition::identity(3)), ExactInt::from(2));
         // S_4: χ^{(2,2)}: degree 2; on [2,1,1]: 0; on [2,2]: 2; on [3,1]: -1; on [4]: 0
         let rho = Partition::new(vec![2u8, 2]);
@@ -82,8 +85,14 @@ mod tests {
             mn.chi(&rho, &Partition::new(vec![2u8, 1, 1])),
             ExactInt::from(0)
         );
-        assert_eq!(mn.chi(&rho, &Partition::new(vec![2u8, 2])), ExactInt::from(2));
-        assert_eq!(mn.chi(&rho, &Partition::new(vec![3u8, 1])), ExactInt::from(-1));
+        assert_eq!(
+            mn.chi(&rho, &Partition::new(vec![2u8, 2])),
+            ExactInt::from(2)
+        );
+        assert_eq!(
+            mn.chi(&rho, &Partition::new(vec![3u8, 1])),
+            ExactInt::from(-1)
+        );
         assert_eq!(mn.chi(&rho, &Partition::new(vec![4u8])), ExactInt::from(0));
     }
 
@@ -100,11 +109,7 @@ mod tests {
                 let col = ev.column_exact(nu);
                 for (rho_id, value) in col.iter().enumerate() {
                     let rho = idx.partition(rho_id as PartitionId);
-                    assert_eq!(
-                        *value,
-                        naive.chi(rho, nu),
-                        "n={n}, rho={rho:?}, nu={nu:?}"
-                    );
+                    assert_eq!(*value, naive.chi(rho, nu), "n={n}, rho={rho:?}, nu={nu:?}");
                 }
             }
         }

@@ -210,10 +210,7 @@ mod tests {
         let idx = PartitionIndex::build(11).unwrap();
         for i in 0..idx.count() {
             let id = i as PartitionId;
-            assert_eq!(
-                &(idx.z_value(id) * idx.class_size(id)),
-                idx.factorial_n()
-            );
+            assert_eq!(&(idx.z_value(id) * idx.class_size(id)), idx.factorial_n());
         }
     }
 
@@ -302,16 +299,20 @@ mod tests {
             vec![2, 1, 1, 1, 1],
             vec![1, 1, 1, 1, 1, 1],
         ];
-        let got: Vec<Vec<u8>> = idx.partitions().iter().map(|p| p.parts().to_vec()).collect();
+        let got: Vec<Vec<u8>> = idx
+            .partitions()
+            .iter()
+            .map(|p| p.parts().to_vec())
+            .collect();
         assert_eq!(got, expected);
         // class sizes for n=6 in this order (see design doc worked example)
         let sizes: Vec<u32> = (0..idx.count())
-            .map(|i| {
-                u32::try_from(idx.class_size(i as PartitionId).clone()).unwrap()
-            })
+            .map(|i| u32::try_from(idx.class_size(i as PartitionId).clone()).unwrap())
             .collect();
         assert_eq!(sizes, vec![120, 144, 90, 90, 40, 120, 40, 15, 45, 15, 1]);
-        let signs: Vec<i8> = (0..idx.count()).map(|i| idx.sign(i as PartitionId)).collect();
+        let signs: Vec<i8> = (0..idx.count())
+            .map(|i| idx.sign(i as PartitionId))
+            .collect();
         assert_eq!(signs, vec![-1, 1, 1, -1, 1, -1, 1, -1, 1, -1, 1]);
     }
 }

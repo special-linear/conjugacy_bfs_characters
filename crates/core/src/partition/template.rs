@@ -131,10 +131,12 @@ impl FromStr for CycleTypeTemplate {
         let mut parts = Vec::new();
         for token in trimmed.split(',') {
             let token = token.trim();
-            let value: u8 = token.parse().map_err(|_| ClassdiamError::MalformedTemplate {
-                template: Vec::new(),
-                reason: format!("cannot parse part {token:?} in {s:?}"),
-            })?;
+            let value: u8 = token
+                .parse()
+                .map_err(|_| ClassdiamError::MalformedTemplate {
+                    template: Vec::new(),
+                    reason: format!("cannot parse part {token:?} in {s:?}"),
+                })?;
             parts.push(value);
         }
         Self::new(&parts)
