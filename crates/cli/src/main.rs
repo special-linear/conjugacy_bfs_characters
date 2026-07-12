@@ -10,9 +10,7 @@ use std::time::{Duration, Instant};
 use anyhow::{bail, Result};
 use clap::{Parser, Subcommand, ValueEnum};
 
-use classdiam_core::driver::{
-    self, BatchConfig, DriverHooks, EngineKind, JobReport, JobStatus,
-};
+use classdiam_core::driver::{self, BatchConfig, DriverHooks, EngineKind, JobReport, JobStatus};
 use classdiam_core::partition::CycleTypeTemplate;
 
 #[derive(Parser)]

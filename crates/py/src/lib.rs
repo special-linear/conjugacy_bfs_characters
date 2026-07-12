@@ -184,9 +184,7 @@ fn outcome_json(outcome: &BatchOutcome, interrupted: bool) -> String {
                     entry["status"] = "suspended".into();
                     entry["checkpoint"] = checkpoint_path
                         .as_ref()
-                        .map_or(serde_json::Value::Null, |p| {
-                            p.display().to_string().into()
-                        });
+                        .map_or(serde_json::Value::Null, |p| p.display().to_string().into());
                     entry["committed_radius"] = (*committed_radius).into();
                 }
                 JobStatus::Skipped { reason } => {
@@ -389,10 +387,7 @@ impl Session {
                     config_hash,
                     out_dir: None,
                     any_suspended,
-                    cancelled: hooks
-                        .cancel
-                        .as_ref()
-                        .is_some_and(CancelToken::is_cancelled),
+                    cancelled: hooks.cancel.as_ref().is_some_and(CancelToken::is_cancelled),
                     reports: vec![report],
                 })
             },

@@ -330,11 +330,9 @@ pub fn resume_batch(
     // is written after the resume. A malformed one is an error.
     let manifest_path = run_dir.join("manifest.json");
     let manifest: serde_json::Value = match std::fs::read_to_string(&manifest_path) {
-        Ok(text) => {
-            serde_json::from_str(&text).map_err(|e| ClassdiamError::InvalidRunDir {
-                reason: format!("malformed manifest.json: {e}"),
-            })?
-        }
+        Ok(text) => serde_json::from_str(&text).map_err(|e| ClassdiamError::InvalidRunDir {
+            reason: format!("malformed manifest.json: {e}"),
+        })?,
         Err(_) => serde_json::Value::Null,
     };
     let run_id = manifest["run_id"].as_str().unwrap_or("resumed").to_string();

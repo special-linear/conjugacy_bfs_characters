@@ -167,7 +167,15 @@ fn pre_cancelled_token_suspends_at_radius_zero() {
         ..Default::default()
     };
     let outcome = run_modular_resumable(
-        &index, &mn, &ctx, &spectra, &union, &CpuBlocked, &options, None, None,
+        &index,
+        &mn,
+        &ctx,
+        &spectra,
+        &union,
+        &CpuBlocked,
+        &options,
+        None,
+        None,
     )
     .unwrap();
     let ModularOutcome::Suspended(body) = outcome else {
@@ -221,7 +229,8 @@ fn run_batch_layout_and_golden() {
     assert_eq!(serde_json::to_value(document).unwrap(), disk);
 
     // matches the committed golden file modulo volatile fields
-    let golden_path = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../fixtures/golden/n06_g2.json");
+    let golden_path =
+        PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../fixtures/golden/n06_g2.json");
     let mut golden: Value =
         serde_json::from_str(&std::fs::read_to_string(golden_path).unwrap()).unwrap();
     strip_volatile(&mut golden);
@@ -229,13 +238,15 @@ fn run_batch_layout_and_golden() {
 
     // manifest shape
     let manifest: Value =
-        serde_json::from_str(&std::fs::read_to_string(dir.join("manifest.json")).unwrap())
-            .unwrap();
+        serde_json::from_str(&std::fs::read_to_string(dir.join("manifest.json")).unwrap()).unwrap();
     assert_eq!(manifest["format"], "classdiam/manifest");
     assert_eq!(manifest["format_version"], 1);
     assert_eq!(manifest["status"], "completed");
     assert_eq!(manifest["run_id"], Value::String(out.run_id.clone()));
-    assert_eq!(manifest["config_hash_blake3"], Value::String(out.config_hash));
+    assert_eq!(
+        manifest["config_hash_blake3"],
+        Value::String(out.config_hash)
+    );
     let job = &manifest["jobs"][0];
     assert_eq!(job["n"], 6);
     assert_eq!(job["union"], "g2");
@@ -262,7 +273,11 @@ fn suspended_run_dir_resumes_to_uninterrupted_result() {
     let reference = stripped(done_document(&out.reports[0].status));
 
     for (tag, deadline, cancel) in [
-        ("deadline", Some(std::time::Instant::now() - std::time::Duration::from_secs(1)), None),
+        (
+            "deadline",
+            Some(std::time::Instant::now() - std::time::Duration::from_secs(1)),
+            None,
+        ),
         ("cancel", None, Some(CancelToken::new())),
     ] {
         if let Some(token) = &cancel {
@@ -315,7 +330,11 @@ fn in_memory_run_with_progress_events() {
         progress: Some(&mut on_progress),
         ..Default::default()
     };
-    let out = run_batch(&transpositions_batch(8, EngineKind::Modular, None), &mut hooks).unwrap();
+    let out = run_batch(
+        &transpositions_batch(8, EngineKind::Modular, None),
+        &mut hooks,
+    )
+    .unwrap();
     assert!(out.out_dir.is_none());
     let JobStatus::Done { document, file } = &out.reports[0].status else {
         panic!("expected completion");
@@ -323,7 +342,11 @@ fn in_memory_run_with_progress_events() {
     assert!(file.is_none(), "in-memory run must not name a file");
 
     let stop = document.results.stopping.stop_radius;
-    assert_eq!(events.len(), stop as usize, "one event per committed radius");
+    assert_eq!(
+        events.len(),
+        stop as usize,
+        "one event per committed radius"
+    );
     for (i, event) in events.iter().enumerate() {
         assert_eq!(event.radius, i as u32 + 1);
         assert_eq!(event.n, 8);

@@ -44,3 +44,23 @@ jobs:
         run: cargo clippy --workspace --all-targets --locked -- -D warnings
       - name: Full tests (release + debug assertions, T1)
         run: cargo test --workspace --locked --profile ci
+
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Build CLI (for interop tests)
+        run: cargo build -p classdiam-cli --release --locked
+      - name: Install classdiam + test deps
+        run: |
+          pip install pytest pandas
+          pip install ./crates/py
+      - name: pytest
+        run: pytest crates/py/tests -v
+        env:
+          CLASSDIAM_CLI_BIN: ${{ github.workspace }}/target/release/classdiam
