@@ -1,0 +1,12 @@
+/target
+/results
+Cargo.lock.orig
+*.ckpt
+*.ckpt.tmp
+__pycache__/
+*.pyc
+/fixtures/scratch/
+criterion/
+.vscode/
+
+.claude/settings.local.json

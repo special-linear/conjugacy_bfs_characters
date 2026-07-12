@@ -1,0 +1,47 @@
+//! Error taxonomy for classdiam-core.
+
+use thiserror::Error;
+
+/// All fallible operations in the core return this error type.
+#[derive(Debug, Error)]
+pub enum ClassdiamError {
+    /// A cycle-type template does not fit in the requested `n`
+    /// (sum of non-fixed-point parts exceeds `n`).
+    #[error("cycle type {template:?} does not fit in S_{n} (needs n >= {min_n})")]
+    TemplateDoesNotFit {
+        template: Vec<u8>,
+        n: u16,
+        min_n: u16,
+    },
+
+    /// The identity class was supplied as a generator without
+    /// `allow_identity_generator` (spec §5.3).
+    #[error("identity class rejected as generator for S_{n}; set allow_identity_generator to permit it")]
+    IdentityGenerator { n: u16 },
+
+    /// An empty generating set (no classes after validation).
+    #[error("empty generating set for S_{n}")]
+    EmptyUnion { n: u16 },
+
+    /// A cycle-type template contains a zero part or is otherwise malformed.
+    #[error("malformed cycle-type template {template:?}: {reason}")]
+    MalformedTemplate { template: Vec<u8>, reason: String },
+
+    /// `n` outside the supported range (2 ..= 255; partition parts are `u8`).
+    #[error("n = {n} outside supported range 1..=255")]
+    UnsupportedN { n: u32 },
+
+    /// Central-eigenvalue integrality violated: `f_ρ ∤ |C_λ|·χ^ρ(λ)`.
+    /// Almost always an indexing/orientation bug (spec §4).
+    #[error("divisibility assertion failed: degree of rho #{rho} does not divide |C|*chi for lambda #{lambda}")]
+    OmegaNotIntegral { rho: usize, lambda: usize },
+
+    /// Exact division by `n!` left a remainder (spec §9.4).
+    #[error("numerator not divisible by n! at radius {radius}, target #{target}")]
+    NotDivisibleByFactorial { radius: u32, target: usize },
+
+    /// A coefficient that must be a nonnegative integer came out negative
+    /// (spec §9.5).
+    #[error("negative coefficient at radius {radius}, target #{target}")]
+    NegativeCoefficient { radius: u32, target: usize },
+}

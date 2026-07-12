@@ -1,0 +1,6 @@
+# Floating point is banned in the math modules of classdiam-core (spec §23 Failure 3:
+# no floating-point zero tests). The ban is enforced by `#![deny(clippy::float_arithmetic)]`
+# scoped inside the math modules (arith, partition, chars, spectra, transform, engine) —
+# NOT workspace-wide, because orchestrate/report legitimately use f64 for timings and
+# estimation (critique finding 11).
+avoid-breaking-exported-api = false
