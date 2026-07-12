@@ -1,0 +1,29 @@
+[package]
+name = "classdiam-py"
+description = "Python bindings for classdiam-core (Python module `classdiam`)"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+publish = false
+
+[lib]
+# The native submodule classdiam._core of the mixed maturin project.
+name = "_core"
+crate-type = ["cdylib"]
+# No Rust-side tests/doctests: everything user-visible is pytest-tested,
+# and skipping them keeps `cargo test --workspace` free of libpython links.
+test = false
+doctest = false
+
+[dependencies]
+classdiam-core = { workspace = true }
+pyo3 = { workspace = true, features = [
+    "abi3-py39",           # one wheel per platform, Python >= 3.9
+    "extension-module",    # never link libpython (manylinux requirement)
+    "generate-import-lib", # Windows: no python3.lib needed at build time
+] }
+serde = { workspace = true }
+serde_json = { workspace = true }
+rayon = { workspace = true }

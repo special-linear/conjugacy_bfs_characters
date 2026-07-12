@@ -1,0 +1,29 @@
+[build-system]
+requires = ["maturin>=1.9,<2"]
+build-backend = "maturin"
+
+[project]
+name = "classdiam"
+description = "Conjugacy-class BFS distances and diameters of symmetric-group Cayley graphs via characters"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT OR Apache-2.0"
+authors = [{ name = "Andrei Smolensky", email = "andrei.smolensky@gmail.com" }]
+keywords = ["symmetric-group", "cayley-graph", "diameter", "characters", "bfs"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: 3",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: Microsoft :: Windows",
+    "Topic :: Scientific/Engineering :: Mathematics",
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+pandas = ["pandas"]
+
+[tool.maturin]
+python-source = "python"
+module-name = "classdiam._core"

@@ -64,11 +64,15 @@ pub struct ProgressEvent {
 /// `progress` fires once per committed layer; `cancel` is observed between
 /// radii (suspending exactly like a deadline); `on_job` fires right after
 /// each job finishes (the CLI prints its per-job line there).
+///
+/// The callbacks are `Send` so a whole run can execute on another thread
+/// (the Python wrapper computes with the GIL released and re-acquires it
+/// inside `progress`).
 #[derive(Default)]
 pub struct DriverHooks<'a> {
-    pub progress: Option<&'a mut dyn FnMut(&ProgressEvent)>,
+    pub progress: Option<&'a mut (dyn FnMut(&ProgressEvent) + Send)>,
     pub cancel: Option<CancelToken>,
-    pub on_job: Option<&'a mut dyn FnMut(&JobReport)>,
+    pub on_job: Option<&'a mut (dyn FnMut(&JobReport) + Send)>,
 }
 
 /// How a single `(n, union)` job ended.
