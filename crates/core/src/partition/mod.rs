@@ -67,7 +67,7 @@ impl Partition {
     pub fn identity(n: u16) -> Self {
         assert!(n <= 255);
         Self {
-            parts: std::iter::repeat(1u8).take(n as usize).collect(),
+            parts: std::iter::repeat_n(1u8, n as usize).collect(),
         }
     }
 

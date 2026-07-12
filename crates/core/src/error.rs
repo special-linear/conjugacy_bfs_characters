@@ -44,4 +44,15 @@ pub enum ClassdiamError {
     /// (spec §9.5).
     #[error("negative coefficient at radius {radius}, target #{target}")]
     NegativeCoefficient { radius: u32, target: usize },
+
+    /// The always-on word-count identity `Σ_ν |C_ν|·a_r(ν) = |U|^r` failed
+    /// (spec §9.3) — silent arithmetic corruption.
+    #[error("word-count identity violated at radius {radius}")]
+    WordCountMismatch { radius: u32 },
+
+    /// Diagnostic safety abort: the radius loop exceeded its configured
+    /// bound without terminating (spec's stopping rule should always fire
+    /// far earlier).
+    #[error("radius limit {limit} exceeded without termination (n = {n})")]
+    RadiusLimitExceeded { n: u16, limit: u32 },
 }

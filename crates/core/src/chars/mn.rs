@@ -253,7 +253,7 @@ mod tests {
             let ev = MnEvaluator::new(n);
             let idx = PartitionIndex::build(n).unwrap();
             let col = ev.column_exact(&Partition::new(vec![n as u8]));
-            for i in 0..idx.count() {
+            for (i, value) in col.iter().enumerate() {
                 let rho = idx.partition(i as PartitionId);
                 // hook shape (n−k, 1^k): first part a, then all ones
                 let parts = rho.parts();
@@ -262,9 +262,9 @@ mod tests {
                 if is_hook {
                     let k = parts.len() - 1; // leg of the whole hook
                     let expected = if k % 2 == 0 { 1i64 } else { -1 };
-                    assert_eq!(col[i], ExactInt::from(expected), "n={n}, rho={rho:?}");
+                    assert_eq!(*value, ExactInt::from(expected), "n={n}, rho={rho:?}");
                 } else {
-                    assert_eq!(col[i], ExactInt::zero(), "n={n}, rho={rho:?}");
+                    assert_eq!(*value, ExactInt::zero(), "n={n}, rho={rho:?}");
                 }
             }
         }
@@ -277,13 +277,13 @@ mod tests {
             let ev = MnEvaluator::new(n);
             let idx = PartitionIndex::build(n).unwrap();
             let table = ev.full_table_exact();
-            for nu_id in 0..idx.count() {
+            for (nu_id, column) in table.iter().enumerate() {
                 let sgn = ExactInt::from(idx.sign(nu_id as PartitionId));
                 for rho_id in 0..idx.count() {
                     let t = idx.transpose_id(rho_id as PartitionId) as usize;
                     assert_eq!(
-                        table[nu_id][t],
-                        &sgn * &table[nu_id][rho_id],
+                        column[t],
+                        &sgn * &column[rho_id],
                         "n={n}, nu={nu_id}, rho={rho_id}"
                     );
                 }
@@ -301,10 +301,10 @@ mod tests {
                 if idx.transpose_id(rho_id as PartitionId) != rho_id as PartitionId {
                     continue;
                 }
-                for nu_id in 0..idx.count() {
+                for (nu_id, column) in table.iter().enumerate() {
                     if idx.sign(nu_id as PartitionId) == -1 {
                         assert_eq!(
-                            table[nu_id][rho_id],
+                            column[rho_id],
                             ExactInt::zero(),
                             "n={n}, self-transpose rho={rho_id}, odd nu={nu_id}"
                         );

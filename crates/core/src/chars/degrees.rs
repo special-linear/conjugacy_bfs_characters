@@ -18,8 +18,8 @@ pub fn hook_lengths(p: &Partition) -> Vec<u32> {
     let cols = transpose.parts();
     let mut hooks = Vec::with_capacity(p.n() as usize);
     for (i, &row_len) in parts.iter().enumerate() {
-        for j in 0..row_len as usize {
-            let h = row_len as u32 - j as u32 + cols[j] as u32 - i as u32 - 1;
+        for (j, &col_len) in cols[..row_len as usize].iter().enumerate() {
+            let h = row_len as u32 - j as u32 + col_len as u32 - i as u32 - 1;
             hooks.push(h);
         }
     }

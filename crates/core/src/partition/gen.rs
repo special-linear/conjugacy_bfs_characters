@@ -21,9 +21,7 @@ impl PartitionCountTable {
         let n = n as usize;
         let w = n + 1;
         let mut counts = vec![0u64; w * w];
-        for l in 0..=n {
-            counts[l] = 1; // p(0 | parts ≤ l) = 1 (empty partition)
-        }
+        counts[..w].fill(1); // p(0 | parts ≤ l) = 1 (empty partition)
         for m in 1..=n {
             for l in 1..=n {
                 // partitions of m with parts ≤ l: either no part equals... standard

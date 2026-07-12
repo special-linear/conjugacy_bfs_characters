@@ -79,7 +79,7 @@ impl CycleTypeTemplate {
             });
         }
         let mut full: SmallVec<[u8; 16]> = SmallVec::from_slice(&self.parts);
-        full.extend(std::iter::repeat(1u8).take((n - sum) as usize));
+        full.extend(std::iter::repeat_n(1u8, (n - sum) as usize));
         Ok(Partition::new(full))
     }
 

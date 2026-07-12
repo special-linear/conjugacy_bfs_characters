@@ -98,10 +98,10 @@ mod tests {
             for nu_id in 0..idx.count() {
                 let nu = idx.partition(nu_id as PartitionId);
                 let col = ev.column_exact(nu);
-                for rho_id in 0..idx.count() {
+                for (rho_id, value) in col.iter().enumerate() {
                     let rho = idx.partition(rho_id as PartitionId);
                     assert_eq!(
-                        col[rho_id],
+                        *value,
                         naive.chi(rho, nu),
                         "n={n}, rho={rho:?}, nu={nu:?}"
                     );

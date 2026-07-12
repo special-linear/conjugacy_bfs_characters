@@ -23,8 +23,10 @@
 
 pub mod arith;
 pub mod chars;
+pub mod engine;
 pub mod error;
 pub mod partition;
+pub mod spectra;
 
 #[cfg(any(test, feature = "test-utils"))]
 pub mod testing;
