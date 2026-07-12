@@ -32,6 +32,7 @@ use crate::arith::{exact_div_checked, ExactInt, ModCtx, Prime31};
 use crate::chars::memtable::PairedModTable;
 use crate::chars::MnEvaluator;
 use crate::checkpoint::CheckpointBody;
+use crate::driver::CancelToken;
 use crate::engine::{LayerRecord, StoppingRule, UnionRun};
 use crate::error::ClassdiamError;
 use crate::partition::{PartitionId, PartitionIndex};
@@ -121,6 +122,9 @@ pub struct ModularOptions {
     /// Wall-clock deadline: checked between radii; on expiry the run
     /// suspends with a checkpoint of the last committed layer.
     pub deadline: Option<std::time::Instant>,
+    /// Cooperative cancellation: checked at the same between-radii point
+    /// as the deadline and suspends identically.
+    pub cancel: Option<CancelToken>,
     /// Recorded into checkpoints (part of the resumed configuration).
     pub allow_identity_generator: bool,
 }
@@ -130,6 +134,7 @@ impl Default for ModularOptions {
         Self {
             radius_limit_factor: 4,
             deadline: None,
+            cancel: None,
             allow_identity_generator: false,
         }
     }
@@ -353,18 +358,23 @@ pub fn run_modular_resumable(
             break (last.r, StoppingRule::AllTypesVisited);
         }
 
-        // Deadline guard: suspend BETWEEN radii; only committed state is
-        // serialized, so a checkpoint can never encode an uncertified stop.
-        if let Some(deadline) = options.deadline {
-            if std::time::Instant::now() >= deadline {
-                return Ok(ModularOutcome::Suspended(make_checkpoint(
-                    &distance,
-                    &first_hit,
-                    &layers,
-                    &stats,
-                    suspend_count + 1,
-                )));
-            }
+        // Deadline/cancel guard: suspend BETWEEN radii; only committed state
+        // is serialized, so a checkpoint can never encode an uncertified stop.
+        let deadline_hit = options
+            .deadline
+            .is_some_and(|d| std::time::Instant::now() >= d);
+        let cancelled = options
+            .cancel
+            .as_ref()
+            .is_some_and(CancelToken::is_cancelled);
+        if deadline_hit || cancelled {
+            return Ok(ModularOutcome::Suspended(make_checkpoint(
+                &distance,
+                &first_hit,
+                &layers,
+                &stats,
+                suspend_count + 1,
+            )));
         }
 
         let r = layers.last().expect("layer 0").r + 1;

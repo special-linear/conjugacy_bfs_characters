@@ -16,6 +16,7 @@
 //! | central eigenvalues `ω_ρ(λ)`, union spectra `θ_ρ(U)`, active rows | [`spectra`] |
 //! | the per-radius transform `N_r = Xᵀ·W` behind a backend trait | [`transform`] |
 //! | radius loop, certification gate, stopping, layer records | [`engine`] |
+//! | batch/resume orchestration, hashes, progress, cancellation | [`driver`] |
 //! | spec §9 invariants (validation layer) | [`validate`] |
 //!
 //! The math modules ban floating point entirely (spec §23 Failure 3); all
@@ -24,6 +25,7 @@
 pub mod arith;
 pub mod chars;
 pub mod checkpoint;
+pub mod driver;
 pub mod engine;
 pub mod error;
 pub mod partition;
