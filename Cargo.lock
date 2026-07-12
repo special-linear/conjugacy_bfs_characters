@@ -213,6 +213,7 @@ dependencies = [
  "classdiam-core",
  "crc32fast",
  "fixedbitset",
+ "humantime",
  "num-bigint",
  "num-integer",
  "num-traits",

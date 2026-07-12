@@ -67,6 +67,22 @@ pub enum ClassdiamError {
     #[error("checkpoint mismatch: {what}")]
     CheckpointMismatch { what: String },
 
+    /// A malformed `n`-range or union spec string (driver-level parsing).
+    #[error("invalid spec: {reason}")]
+    InvalidSpec { reason: String },
+
+    /// A run directory does not contain what resume needs.
+    #[error("invalid run directory: {reason}")]
+    InvalidRunDir { reason: String },
+
+    /// I/O failure with location context (driver file management).
+    #[error("{context}: {source}")]
+    IoContext {
+        context: String,
+        #[source]
+        source: std::io::Error,
+    },
+
     #[error("i/o error: {0}")]
     Io(#[from] std::io::Error),
 }
