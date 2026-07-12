@@ -11,7 +11,7 @@ use classdiam_core::chars::MnEvaluator;
 use classdiam_core::engine::exact::run_exact;
 use classdiam_core::partition::{CycleTypeTemplate, PartitionIndex};
 use classdiam_core::report::schema::ResultDocument;
-use classdiam_core::report::{build_result, RunMeta};
+use classdiam_core::report::{build_result, EngineDescriptor, RunMeta};
 use classdiam_core::spectra::{resolve_union, BaseSpectra};
 use serde_json::Value;
 
@@ -43,7 +43,10 @@ fn n6_transpositions_document() -> ResultDocument {
             threads: 1,
             total_wall_s: 0.0,
             config_hash: "golden".into(),
+            resumed_from_checkpoint: false,
+            suspend_resume_count: 0,
         },
+        EngineDescriptor::exact_reference(),
     )
 }
 

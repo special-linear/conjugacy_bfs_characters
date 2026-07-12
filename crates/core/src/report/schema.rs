@@ -8,6 +8,7 @@
 
 use serde::{Deserialize, Serialize};
 
+use crate::engine::modular::CertificationStats;
 use crate::engine::StoppingRule;
 use crate::partition::PartitionId;
 use crate::spectra::UnionParity;
@@ -28,6 +29,11 @@ pub struct ResultDocument {
     pub class_data: ClassData,
     pub arithmetic: Arithmetic,
     pub engine: EngineInfo,
+    /// Certification audit trail (modular engine only): every all-zero
+    /// residue vector was resolved by a rigorous tier — the document's
+    /// proof that spec Failures 4/9 cannot have occurred silently.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub certification: Option<CertificationStats>,
     pub results: Results,
     /// VOLATILE: stripped in golden-file comparisons.
     pub timings_s: Timings,

@@ -57,9 +57,16 @@ evaluation). No floating point, no probabilistic step, no uncertified stopping.
 
 ```
 cargo test --workspace                 # T0+T1 test suite
-cargo run -p classdiam-cli -- run -n 6..=12 -u 2 -u "3+2,2" -o results/quick
-cargo run -p classdiam-cli -- verify --max-n 8
+cargo run -p classdiam-cli --profile ci -- run -n 6..=30 -u 2 -u "3+2,2" -o results/quick
+cargo run -p classdiam-cli --profile ci -- run -n 35 -u 2 --deadline 6900   # suspends on expiry (exit 75)
+cargo run -p classdiam-cli --profile ci -- resume results/<run_id>          # continues from checkpoints
+cargo run -p classdiam-cli --profile ci -- verify --max-n 8                 # brute-force cross-check
 ```
+
+The default engine is the modular production engine (31-bit prime screening
+with a rigorous per-radius certification gate); `--engine exact` selects the
+big-integer reference engine. Both produce identical results — the test
+suite proves it on every catalog union and under adversarial prime choices.
 
 Union grammar: classes joined by `+`, parts within a class by `,` — `-u 2` is the
 transposition class in every `S_n`, `-u "3+2,2"` is the union of 3-cycles and double

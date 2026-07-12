@@ -23,6 +23,7 @@
 
 pub mod arith;
 pub mod chars;
+pub mod checkpoint;
 pub mod engine;
 pub mod error;
 pub mod partition;

@@ -22,6 +22,11 @@ Spec references are to `notes/character_method_cayley_diameters.md`.
 | stopping: empty `new_r` on exact supports | §5.2 | `engine::exact::run_exact` (`StoppingRule::EmptyLayer`); parity-cover early exit = `AllTypesVisited`; normal-closure prediction is a cross-check assert only |
 | coefficient bound `a_r(ν) ≤ ⌊\|U\|^r/\|C_ν\|⌋` | §9.3 corollary | `arith::bounds::coefficient_bound` (P2 certification tier 1/2) |
 | screening primes `p > n`, `p < 2³¹`; overflow bound | §12–13 | `arith::modp::{screening_primes, ModCtx}`; compile-time bound in `arith` (`MAX_ACCUM_TERMS`) |
+| transpose pairing `W± = f·(P ± P′)`, `θ_even/odd` split | §11.1 | `spectra::PairedSpectrum`, weights assembled in `engine::modular` (self-transpose rows use `f·P`) |
+| paired multi-prime table, parity-grouped targets | §14 | `chars::memtable::PairedModTable` (rayon generation) |
+| per-radius transform `N = Xᵀ·W` (mod p), GPU seam | §13.3 | `transform::{TransformBackend, cpu::CpuReference, cpu::CpuBlocked}` |
+| modular screening + certified zeros (tiers: bound / resident CRT / exact) | §12.2–12.3 | `engine::modular::run_modular_resumable` (`CertificationStats` audit trail) |
+| checkpoints (committed layers only), resume, deadline | design 01 §10 | `checkpoint::{write_checkpoint, read_checkpoint}`, `engine::modular::ModularOutcome` |
 | brute-force oracles (BFS, set-product DP, word-count DP) | §9.7, §22.3 | `testing::bruteforce` |
 | mixed products `K_A K_B` | §16.3, §22.4 | test `mixed_products_and_union_square` (crates/core/tests/bruteforce.rs) |
 | result JSON, order embedding, metadata | §19.3 | `report::{build_result, schema}` + `docs/output_schema.md` |

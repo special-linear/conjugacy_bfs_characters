@@ -27,6 +27,51 @@ pub struct RunMeta {
     pub threads: u32,
     pub total_wall_s: f64,
     pub config_hash: String,
+    pub resumed_from_checkpoint: bool,
+    pub suspend_resume_count: u32,
+}
+
+/// Which engine produced the run — fills the `arithmetic`/`engine`/
+/// `certification` blocks of the document.
+#[derive(Clone, Debug)]
+pub struct EngineDescriptor {
+    pub engine_mode: String,
+    pub backend: String,
+    pub rows_used: String,
+    pub arithmetic_mode: String,
+    pub resident_primes: Vec<u32>,
+    pub certifier: String,
+    pub certification: Option<crate::engine::modular::CertificationStats>,
+}
+
+impl EngineDescriptor {
+    pub fn exact_reference() -> Self {
+        Self {
+            engine_mode: "exact_reference".into(),
+            backend: "exact-bigint-v1".into(),
+            rows_used: "full".into(),
+            arithmetic_mode: "exact-bigint".into(),
+            resident_primes: vec![],
+            certifier: "exact".into(),
+            certification: None,
+        }
+    }
+
+    pub fn modular(
+        primes: &[crate::arith::Prime31],
+        backend: &str,
+        stats: crate::engine::modular::CertificationStats,
+    ) -> Self {
+        Self {
+            engine_mode: "modular_certified".into(),
+            backend: backend.into(),
+            rows_used: "paired_representatives".into(),
+            arithmetic_mode: "modular+certified".into(),
+            resident_primes: primes.iter().map(|p| p.0).collect(),
+            certifier: "tiered(bound,crt,exact)".into(),
+            certification: Some(stats),
+        }
+    }
 }
 
 /// Union slug used in file names: classes joined `+`, parts joined `.`
@@ -49,6 +94,7 @@ pub fn build_result(
     label: Option<String>,
     allow_identity_generator: bool,
     meta: RunMeta,
+    engine: EngineDescriptor,
 ) -> ResultDocument {
     let q = index.count();
 
@@ -112,8 +158,8 @@ pub fn build_result(
             run_id: meta.run_id,
             started_utc: meta.started_utc,
             finished_utc: meta.finished_utc,
-            resumed_from_checkpoint: false,
-            suspend_resume_count: 0,
+            resumed_from_checkpoint: meta.resumed_from_checkpoint,
+            suspend_resume_count: meta.suspend_resume_count,
         },
         n: index.n(),
         factorial_n: index.factorial_n().to_string(),
@@ -140,18 +186,19 @@ pub fn build_result(
                 .collect(),
         },
         arithmetic: Arithmetic {
-            mode: "exact-bigint".into(),
-            resident_primes: vec![],
-            certifier: "exact".into(),
+            mode: engine.arithmetic_mode,
+            resident_primes: engine.resident_primes,
+            certifier: engine.certifier,
         },
         engine: EngineInfo {
-            mode: "exact_reference".into(),
-            backend: "exact-bigint-v1".into(),
-            rows_used: "full".into(),
+            mode: engine.engine_mode,
+            backend: engine.backend,
+            rows_used: engine.rows_used,
             active_row_count: q as u64 - zero_rows_all_bases.len() as u64,
             zero_rows_all_bases,
             threads: meta.threads,
         },
+        certification: engine.certification,
         results: Results {
             unreachable_value: -1,
             distance: run.distance.clone(),

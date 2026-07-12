@@ -57,4 +57,16 @@ pub enum ClassdiamError {
     /// far earlier).
     #[error("radius limit {limit} exceeded without termination (n = {n})")]
     RadiusLimitExceeded { n: u16, limit: u32 },
+
+    /// A checkpoint file is malformed (bad magic/version/CRC/truncation).
+    #[error("invalid checkpoint: {reason}")]
+    CheckpointFormat { reason: String },
+
+    /// A checkpoint belongs to a different configuration or partition-order
+    /// version; resuming would be mathematically meaningless (spec §19.3).
+    #[error("checkpoint mismatch: {what}")]
+    CheckpointMismatch { what: String },
+
+    #[error("i/o error: {0}")]
+    Io(#[from] std::io::Error),
 }

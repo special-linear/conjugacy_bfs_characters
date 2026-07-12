@@ -8,13 +8,13 @@
 //! - same-parity first hit set  → POSITIVE by the `a_{r+2} ≥ a_r` lemma
 //!   (counted in a metric; NEVER asserted on residues — a positive can
 //!   vanish mod every prime, critique finding 2);
-//! - otherwise                  → CANDIDATE, certified before layer commit:
-//!   - T1 bound-zero:   `a_r(ν) ≤ ⌊|U|^r/|C_ν|⌋ = 0`;
-//!   - T2 resident CRT: all residues zero and `∏ primes > ⌊|U|^r/|C_ν|⌋`
-//!       determine `a_r(ν) = 0` (spec §12.3);
-//!   - T3 exact:        big-integer evaluation over representative rows
-//!       (cached exact character columns, incremental exact powers).
-//!   Every tier terminates with a rigorous verdict; no probabilistic step.
+//! - otherwise                  → CANDIDATE, certified before layer commit.
+//!
+//! Certification tiers (each terminates with a rigorous verdict; no
+//! probabilistic step anywhere):
+//! - T1 bound-zero: `a_r(ν) ≤ ⌊|U|^r/|C_ν|⌋ = 0`;
+//! - T2 resident CRT: all residues zero and `∏ primes > ⌊|U|^r/|C_ν|⌋` together determine `a_r(ν) = 0` (spec §12.3);
+//! - T3 exact: big-integer evaluation over representative rows (cached exact character columns, incremental exact powers).
 //!
 //! The stopping test runs only on fully certified supports; layer commit
 //! and stopping logic mirror the exact reference engine bit for bit.
@@ -31,6 +31,7 @@ use serde::{Deserialize, Serialize};
 use crate::arith::{exact_div_checked, ExactInt, ModCtx, Prime31};
 use crate::chars::memtable::PairedModTable;
 use crate::chars::MnEvaluator;
+use crate::checkpoint::CheckpointBody;
 use crate::engine::{LayerRecord, StoppingRule, UnionRun};
 use crate::error::ClassdiamError;
 use crate::partition::{PartitionId, PartitionIndex};
@@ -117,16 +118,33 @@ pub struct CertificationStats {
 pub struct ModularOptions {
     /// Diagnostic radius bound multiplier (default 4·n).
     pub radius_limit_factor: u32,
+    /// Wall-clock deadline: checked between radii; on expiry the run
+    /// suspends with a checkpoint of the last committed layer.
+    pub deadline: Option<std::time::Instant>,
+    /// Recorded into checkpoints (part of the resumed configuration).
+    pub allow_identity_generator: bool,
 }
 
 impl Default for ModularOptions {
     fn default() -> Self {
         Self {
             radius_limit_factor: 4,
+            deadline: None,
+            allow_identity_generator: false,
         }
     }
 }
 
+/// How a resumable run ended.
+#[derive(Debug)]
+pub enum ModularOutcome {
+    Completed(UnionRun, CertificationStats),
+    /// Deadline hit: the checkpoint holds all committed (certified) state;
+    /// resume continues at `committed_radius + 1`.
+    Suspended(CheckpointBody),
+}
+
+/// Convenience wrapper for runs without deadline/resume (tests, small n).
 pub fn run_modular(
     index: &PartitionIndex,
     mn: &MnEvaluator,
@@ -136,6 +154,26 @@ pub fn run_modular(
     backend: &dyn TransformBackend,
     options: &ModularOptions,
 ) -> Result<(UnionRun, CertificationStats), ClassdiamError> {
+    match run_modular_resumable(index, mn, ctx, spectra, union, backend, options, None, None)? {
+        ModularOutcome::Completed(run, stats) => Ok((run, stats)),
+        ModularOutcome::Suspended(_) => {
+            unreachable!("no deadline was set, suspension is impossible")
+        }
+    }
+}
+
+#[allow(clippy::too_many_arguments)]
+pub fn run_modular_resumable(
+    index: &PartitionIndex,
+    mn: &MnEvaluator,
+    ctx: &ModularContext,
+    spectra: &BaseSpectra,
+    union: &ResolvedUnion,
+    backend: &dyn TransformBackend,
+    options: &ModularOptions,
+    resume: Option<CheckpointBody>,
+    mut on_layer_committed: Option<&mut dyn FnMut(&CheckpointBody)>,
+) -> Result<ModularOutcome, ClassdiamError> {
     let n = index.n();
     let q = index.count();
     let identity = index.identity_id();
@@ -215,17 +253,118 @@ pub fn run_modular(
     let feasible = super::parity_feasible_set(index, union.parity);
     let factorial_exact = ExactInt::from(index.factorial_n().clone());
     let mut stats = CertificationStats::default();
+    let mut suspend_count = 0u32;
     let radius_limit = options.radius_limit_factor * u32::from(n).max(1);
+
+    // Resume: restore committed state and rebuild powers deterministically
+    // by repeated multiplication (bit-identical to the incremental path).
+    let resolved_classes: Vec<Vec<u8>> = union
+        .class_ids
+        .iter()
+        .map(|&id| index.partition(id).parts().to_vec())
+        .collect();
+    if let Some(body) = resume {
+        if body.n != n {
+            return Err(ClassdiamError::CheckpointMismatch {
+                what: format!("checkpoint n={} but engine n={n}", body.n),
+            });
+        }
+        if body.resolved_classes != resolved_classes {
+            return Err(ClassdiamError::CheckpointMismatch {
+                what: "generator classes differ".into(),
+            });
+        }
+        let engine_primes: Vec<u32> = ctx.primes.iter().map(|p| p.0).collect();
+        if body.primes != engine_primes {
+            return Err(ClassdiamError::CheckpointMismatch {
+                what: "screening primes differ".into(),
+            });
+        }
+        if body.distance.len() != q
+            || body.layers.last().map(|l| l.r) != Some(body.committed_radius)
+        {
+            return Err(ClassdiamError::CheckpointMismatch {
+                what: "inconsistent checkpoint state".into(),
+            });
+        }
+        distance = body.distance;
+        first_hit = [body.first_hit_even, body.first_hit_odd];
+        visited.clear();
+        for (nu, &d) in distance.iter().enumerate() {
+            if d >= 0 {
+                visited.insert(nu);
+            }
+        }
+        layers = body.layers;
+        stats = body.cert_stats;
+        suspend_count = body.suspend_count;
+        let r0 = body.committed_radius;
+        for _ in 0..r0 {
+            for lane in 0..lanes {
+                let c = &ctx.ctxs[lane];
+                for i in 0..reps {
+                    p_mod[lane][i] = c.mul(p_mod[lane][i], theta_plus_mod[lane][i]);
+                    p_prime_mod[lane][i] = c.mul(p_prime_mod[lane][i], theta_minus_mod[lane][i]);
+                }
+                union_size_pow_mod[lane] =
+                    ctx.ctxs[lane].mul(union_size_pow_mod[lane], union_size_mod[lane]);
+            }
+            for i in 0..reps {
+                p_exact[i] *= &paired.theta_plus[i];
+                p_prime_exact[i] *= &paired.theta_minus[i];
+            }
+            union_size_pow *= &union_size;
+        }
+    }
+
+    let make_checkpoint = |distance: &Vec<i32>,
+                           first_hit: &[Vec<i32>; 2],
+                           layers: &Vec<LayerRecord>,
+                           stats: &CertificationStats,
+                           suspend_count: u32|
+     -> CheckpointBody {
+        CheckpointBody {
+            n,
+            resolved_classes: resolved_classes.clone(),
+            allow_identity_generator: options.allow_identity_generator,
+            primes: ctx.primes.iter().map(|p| p.0).collect(),
+            committed_radius: layers.last().expect("layer 0").r,
+            distance: distance.clone(),
+            first_hit_even: first_hit[0].clone(),
+            first_hit_odd: first_hit[1].clone(),
+            layers: layers.clone(),
+            cert_stats: stats.clone(),
+            suspend_count,
+        }
+    };
 
     let even_count = ctx.table.even_count();
     let total_targets = ctx.table.targets().len();
 
     let (stop_radius, stopping) = loop {
+        // A resumed terminal checkpoint: the last committed layer already
+        // had an empty `new` set, i.e. the original run had ALREADY stopped
+        // via the spec §5.2 rule — do not run another radius.
+        let last = layers.last().expect("layer 0");
+        if last.r >= 1 && last.new.is_empty() {
+            break (last.r, StoppingRule::EmptyLayer);
+        }
         if visited.count_ones(..) == feasible.count_ones(..) {
-            break (
-                layers.last().expect("layer 0").r,
-                StoppingRule::AllTypesVisited,
-            );
+            break (last.r, StoppingRule::AllTypesVisited);
+        }
+
+        // Deadline guard: suspend BETWEEN radii; only committed state is
+        // serialized, so a checkpoint can never encode an uncertified stop.
+        if let Some(deadline) = options.deadline {
+            if std::time::Instant::now() >= deadline {
+                return Ok(ModularOutcome::Suspended(make_checkpoint(
+                    &distance,
+                    &first_hit,
+                    &layers,
+                    &stats,
+                    suspend_count + 1,
+                )));
+            }
         }
 
         let r = layers.last().expect("layer 0").r + 1;
@@ -415,6 +554,15 @@ pub fn run_modular(
         new.sort_unstable();
         let layer_is_empty = new.is_empty();
         layers.push(LayerRecord { r, new, support });
+        if let Some(sink) = on_layer_committed.as_deref_mut() {
+            sink(&make_checkpoint(
+                &distance,
+                &first_hit,
+                &layers,
+                &stats,
+                suspend_count,
+            ));
+        }
         if layer_is_empty {
             break (r, StoppingRule::EmptyLayer);
         }
@@ -431,7 +579,7 @@ pub fn run_modular(
     let diameter = distance.iter().copied().max().unwrap_or(0).max(0) as u32;
     let reachable_count = visited.count_ones(..);
     let [fh_even, fh_odd] = first_hit;
-    Ok((
+    Ok(ModularOutcome::Completed(
         UnionRun {
             n,
             distance,
