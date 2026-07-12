@@ -174,10 +174,14 @@ class RunSet(list):
 
 def _normalize_ns(n: Union[int, str, Sequence[int]]) -> List[int]:
     if isinstance(n, str):
-        return _core.parse_n_spec(n)
-    if isinstance(n, int):
-        return [n]
-    return [int(x) for x in n]
+        ns = _core.parse_n_spec(n)
+    elif isinstance(n, int):
+        ns = [n]
+    else:
+        ns = [int(x) for x in n]
+    if not ns:
+        raise ValueError("no n values given")
+    return ns
 
 
 def _normalize_union(union: UnionSpec) -> List[List[int]]:
@@ -194,7 +198,10 @@ def _normalize_union(union: UnionSpec) -> List[List[int]]:
 def _normalize_unions(unions: Union[UnionSpec, Sequence[UnionSpec]]) -> List[List[List[int]]]:
     if isinstance(unions, str):
         return [_normalize_union(unions)]
-    return [_normalize_union(u) for u in unions]
+    normalized = [_normalize_union(u) for u in unions]
+    if not normalized:
+        raise ValueError("no generating unions given")
+    return normalized
 
 
 def _finish(outcome: dict) -> RunSet:

@@ -325,16 +325,18 @@ pub fn resume_batch(
         });
     }
 
-    // reload the existing manifest to patch job entries
+    // Reload the manifest to patch job entries. A missing manifest is
+    // tolerated (Session-produced checkpoint dirs have none); a fresh one
+    // is written after the resume. A malformed one is an error.
     let manifest_path = run_dir.join("manifest.json");
-    let manifest_text =
-        std::fs::read_to_string(&manifest_path).map_err(|_| ClassdiamError::InvalidRunDir {
-            reason: format!("missing manifest.json in {}", run_dir.display()),
-        })?;
-    let manifest: serde_json::Value =
-        serde_json::from_str(&manifest_text).map_err(|e| ClassdiamError::InvalidRunDir {
-            reason: format!("malformed manifest.json: {e}"),
-        })?;
+    let manifest: serde_json::Value = match std::fs::read_to_string(&manifest_path) {
+        Ok(text) => {
+            serde_json::from_str(&text).map_err(|e| ClassdiamError::InvalidRunDir {
+                reason: format!("malformed manifest.json: {e}"),
+            })?
+        }
+        Err(_) => serde_json::Value::Null,
+    };
     let run_id = manifest["run_id"].as_str().unwrap_or("resumed").to_string();
     let run_config_hash = manifest["config_hash_blake3"]
         .as_str()
