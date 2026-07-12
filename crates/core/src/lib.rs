@@ -21,7 +21,12 @@
 //! The math modules ban floating point entirely (spec §23 Failure 3); all
 //! reachability decisions are exact integer/residue arithmetic.
 
+pub mod arith;
+pub mod chars;
 pub mod error;
 pub mod partition;
+
+#[cfg(any(test, feature = "test-utils"))]
+pub mod testing;
 
 pub use error::ClassdiamError;
