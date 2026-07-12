@@ -373,9 +373,18 @@ Key families (full tables of named tests in the testing design doc):
   corrected memory model), fused all-radii sweep, intra-layer certification
   checkpoints, `--distances-only` opt-in (clearly labeled: forfeits mixed-parity
   supports).
-- **P5 — Python**: `classdiam-py` (abi3, GIL released, progress callback, cancel →
-  checkpointed suspension), maturin wheels, Kaggle workflow docs (wheel-from-dataset,
-  copy read-only input checkpoints into /kaggle/working before resume).
+- **P5 — Python** ✅ (done 2026-07, ahead of P3/P4 by decision): `classdiam-py`
+  (abi3-py39, GIL released, progress callback, Ctrl-C → CancelToken →
+  checkpointed suspension surfaced as `classdiam.Suspended`), maturin wheels via
+  `wheels.yml` (GitHub releases only — no PyPI), `docs/kaggle.md`. Prerequisite
+  delivered with it: the batch/resume/session driver lifted from the CLI into
+  `classdiam-core::driver` (job-v1/run-v1 hashes moved verbatim and pinned by
+  test; run dirs interchangeable between CLI and Python). Deliberate
+  divergences from §12's sketch: `Session(n, engine=…, primes=…, threads=…)`
+  takes no base classes (`ModularContext` is union-independent; `BaseSpectra`
+  is per-union and cheap); `estimate()`/`plan_only` deferred to P3 (planner);
+  payloads cross the FFI as JSON strings (same serde types as the files)
+  rather than via `pythonize`.
 - **P6 — GPU backend** against the frozen `TransformBackend` contract (bit-equality
   harness already in place from CpuReference/CpuBlocked).
 

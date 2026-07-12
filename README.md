@@ -45,10 +45,12 @@ evaluation). No floating point, no probabilistic step, no uncertified stopping.
 
 - `crates/core` — `classdiam-core`: partitions, Murnaghan–Nakayama evaluator,
   spectra, modular/exact arithmetic, transform backends, diameter engine,
-  checkpointing, validation. No file I/O in math modules.
-- `crates/cli` — `classdiam` binary: `run`, `resume`, `estimate`, `verify`,
-  `fixtures`, `inspect`, `bench-scaling`.
-- `crates/py` (reserved) — PyO3/maturin wheel for Kaggle notebooks.
+  checkpointing, validation, and the shared batch/resume driver. No file
+  I/O in math modules.
+- `crates/cli` — `classdiam` binary: `run`, `resume`, `verify` (a thin shell
+  over the core driver; `estimate` et al. arrive with the P3 planner).
+- `crates/py` — `classdiam` Python package (PyO3/maturin, abi3 ≥ 3.9) for
+  Kaggle notebooks; same driver, interchangeable run directories.
 - `crates/gpu` (reserved) — GPU `TransformBackend` implementation.
 - `fixtures/` — committed SymPy-generated ground truth; `tools/` — fixture and
   adversarial-case generators (Python).
@@ -71,3 +73,29 @@ suite proves it on every catalog union and under adversarial prime choices.
 Union grammar: classes joined by `+`, parts within a class by `,` — `-u 2` is the
 transposition class in every `S_n`, `-u "3+2,2"` is the union of 3-cycles and double
 transpositions. Cycle types are written without fixed points and padded per `n`.
+
+## Python (Kaggle)
+
+The same engine ships as the `classdiam` Python package (abi3 wheels for
+Linux x86_64 and Windows on GitHub releases — see
+[`docs/kaggle.md`](docs/kaggle.md) for the full notebook workflow):
+
+```python
+!pip install -q https://github.com/<owner>/<repo>/releases/download/v0.1.0/<wheel>.whl
+
+import classdiam
+res = classdiam.run(n="6..=30", unions=["2"])       # one RunResult per n
+res[0].diameter, res[0].distances                    # exact, canonical order
+res[0].to_dataframe()                                # pandas view
+
+# long runs: budget + checkpoints, resumable next session (or by the CLI)
+try:
+    res = classdiam.run(n=35, unions=["2"], deadline_s=6600,
+                        out_dir="/kaggle/working/results")
+except classdiam.Suspended:
+    pass                                             # later: classdiam.resume(...)
+```
+
+Build locally with `pip install ./crates/py` (needs Rust; maturin arrives
+via pip build isolation). Run directories, hashes, and the JSON schema are
+identical between the CLI and Python — each can resume the other's runs.
