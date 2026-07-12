@@ -12,11 +12,11 @@ name = "classdiam"
 path = "src/main.rs"
 
 [dependencies]
-classdiam-core = { workspace = true }
+# test-utils exposes the brute-force oracles that power `classdiam verify`.
+classdiam-core = { workspace = true, features = ["test-utils"] }
 clap = { workspace = true }
 anyhow = { workspace = true }
-toml = { workspace = true }
+blake3 = { workspace = true }
+humantime = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
-tracing = { workspace = true }
-tracing-subscriber = { workspace = true }

@@ -148,7 +148,7 @@ mod tests {
         // every entry resolves
         for entry in &a {
             let index = PartitionIndex::build(entry.n).unwrap();
-            let union = resolve_entry(&index, &entry);
+            let union = resolve_entry(&index, entry);
             assert!(!union.class_ids.is_empty(), "{}", entry.label);
         }
         // sanity: systematic part sizes — singles: Σ_{n=2..7} (p(n)−1) = 1+2+4+6+10+14 = 37
