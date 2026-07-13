@@ -11,7 +11,7 @@ suspension, resume across sessions.
 from the GitHub release:
 
 ```python
-!pip install -q https://github.com/<owner>/<repo>/releases/download/v0.1.0/classdiam-0.1.0-cp39-abi3-manylinux_2_17_x86_64.whl
+!pip install -q https://github.com/special-linear/conjugacy_bfs_characters/releases/download/v0.1.0/classdiam-0.1.0-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
 ```
 
 (Copy the exact wheel URL from the release page — the manylinux tag may

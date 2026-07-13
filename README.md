@@ -81,7 +81,7 @@ Linux x86_64 and Windows on GitHub releases — see
 [`docs/kaggle.md`](docs/kaggle.md) for the full notebook workflow):
 
 ```python
-!pip install -q https://github.com/<owner>/<repo>/releases/download/v0.1.0/<wheel>.whl
+!pip install -q https://github.com/special-linear/conjugacy_bfs_characters/releases/download/v0.1.0/classdiam-0.1.0-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
 
 import classdiam
 res = classdiam.run(n="6..=30", unions=["2"])       # one RunResult per n
